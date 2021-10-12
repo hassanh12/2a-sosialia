@@ -5,6 +5,44 @@
     <title>Hjemmesiden med arrangementer</title>
 </head>
 <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hjemmesiden med arrangementer</title>
+
+    <link rel="stylesheet" href="HomepageStyle.css">
+</head>
+<body>
+<div class="smartphone">
+    <div class="content">
+        <select id="filterMeny">
+            <option selected disabled>Filterer</option>
+            <option>Fotball</option>
+            <option>Frisbeegolf</option>
+            <option>Vors</option>
+            <option>Studybuddy</option>
+        </select>
+        <p id="skrivUt"></p>
+    </div> <!--Hentet fra w3schools, link:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_device_smartphone -->
+</div>
+
+
+<script>
+    var skrivUt=document.getElementById("skrivUt");
+    var filterMeny=document.getElementById("filterMeny");
+    var filterArray = filterMeny.options;
+
+    filterMeny.onchange=function(){
+        var indeks=filterMeny.selectedIndex;
+        if(indeks>=1)skrivUt.innerHTML="Filterer etter " +filterArray[indeks].text;
+        else skrivUt.innerHTML="";
+    }
+    filterMeny.style.visibility="visible"
+
+</script>
+</body>
+</html>
 
 </body>
 </html>
