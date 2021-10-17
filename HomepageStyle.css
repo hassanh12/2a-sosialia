@@ -1,3 +1,6 @@
+.body{
+    margin: 0 0 55px 0;
+}
 /* The device with borders */
 .smartphone {
     position: relative;
@@ -44,38 +47,40 @@
     height: 550px;
     background: white;
 }
-.nav{ /* Hele navbaren*/
-    display: inline-block;
-    padding: 10px;
-    z-index: 10;
-    position: fixed;
-    overflow: hidden;
-    bottom: -100%;
+.nav{
+    background-color: white;
+    position: absolute;
+    display: flex; /*flex for å sikre at ikonene er jevnt fordelt*/
+    height: 55px;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    overflow-x: auto; /*utvide kompatibiliteten og støtter for mindre skjermer,  brukeren kan bla ikonene hvis det er nødvendig*/
 }
-nav ul{ /* Knappene generelt */
-    padding: 0;
-    margin: 0;
-    display: inline-flex;
-    text-align: center;
-    font-size: 17px;
-    list-style-type: none; /*Fjerner vekk svarte sirkler*/
+.NavKnapp{
+    color: #5b0e2d;
+    font-family: Calibri;
+    font-size: 10px;
+    display: flex;
+    flex-grow: 1; /*jevnt fordelt beløp over navigasjonsknappene*/
+    flex-direction: column; /*gjør at ikonen er over navnet*/
+    align-items: center;
+    min-width: 50px;
+    overflow: hidden; /*sikrer navKnapp navnene ikke går over en ny linje, og at teksten ikke utvider mer enn bredden på knappen*/
+    white-space: nowrap; /*----||-----*/
+    justify-content: center;
+    text-decoration: none; /*fjerne understreken*/
+    -webkit-tap-highlight-color: transparent; /*fjerner blå uthevingsfarge når du klikker på lenken på mobilen*/
+    transition: background-color 0.1s ease-in-out; /*Gjør hoveren smooth*/
 }
-/*Hvert enkel knapp*/
-nav ul li{
-    position: relative;
+.NavKnapp:hover{
+    background-color: lightgrey;
 }
-nav ul li a{
-    float: left;
-    color: white;
-    display: block;
-    min-width: 69px;
-    padding: 12px 4px;
-    text-decoration: none;
-    background-color: darkred;
+.active{
+    color: black;
 }
-nav ul li a.active{
-    background-color: gray;
-    color: darkred;
+.IconName{
+    font-size: 16px;
 }
 
 

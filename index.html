@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="HomepageStyle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--Hentet fra https://fonts.google.com/icons?selected=Material+Icons-->
+
 </head>
 <body>
 <div class="smartphone">
-    <div class="content">
+    <div class="content"> <!--Starten av alt som i mobil-->
         <select id="filterMeny">
             <option selected disabled>Filterer</option>
             <option>Fotball</option>
@@ -19,26 +22,29 @@
         </select>
         <p id="skrivUt"></p>
 
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Hjem</a></li>
-            </ul>
-            <ul>
-                <li><a href="EventInfo.html">Favo</a></li>
-            </ul>
-            <ul>
-                <li><a href="EventInfo.html">Legg</a></li>
-            </ul>
-            <ul>
-                <li><a href="EventInfo.html">Mine</a></li>
-            </ul>
+        <nav class="nav">
+            <a href="index.html" class="NavKnapp active">
+                <span class="material-icons">home</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Homepage</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="#" class="NavKnapp">
+                <span class="material-icons">add_box</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Add Event</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="#" class="NavKnapp">
+                <span class="material-icons">favorite</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Favorites</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="#" class="NavKnapp">
+                <span class="material-icons">account_box</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Profile</span> <!--Navnet på navbar knappene-->
+            </a>
         </nav>
-
-
-
-
-    </div> <!--Hentet fra w3schools, link:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_device_smartphone -->
-</div>
+    </div> <!--Div-elementet for Mobilinnholdet lukkes-->
+</div> <!--Hentet fra w3schools, link:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_device_smartphone -->
 
 
 <script>
