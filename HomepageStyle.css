@@ -74,7 +74,7 @@
     transition: background-color 0.1s ease-in-out; /*Gjør hoveren smooth*/
 }
 .NavKnapp:hover{
-    background-color: lightgrey;
+    background-color: white;
 }
 .active{
     color: black;
@@ -83,4 +83,14 @@
     font-size: 16px;
 }
 
+#filterMeny{
+    background:red;
+    color: white;
+    font-family: arial;
+    font-size: 16px;
+    border-radius: 24px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
 
+  }
