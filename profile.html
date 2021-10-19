@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hjemmesiden med arrangementer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="profilestyle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--Hentet fra https://fonts.google.com/icons?selected=Material+Icons-->
+
+</head>
+<body>
+
+<div class="smartphone">
+    <div class="content"> <!--Starten av alt som i mobil-->
+        <select id="filterMeny">
+            <option selected disabled>Filterer</option>
+            <option>Fotball</option>
+            <option>Frisbeegolf</option>
+            <option>Vors</option>
+            <option>Studybuddy</option>
+        </select>
+        <p id="skrivUt"></p>
+        <p class="center" style="font-size: 25px"><strong>My profile</strong></p>
+
+        <!-- kilde https://www.w3schools.com/howto/howto_css_profile_card.asp -->
+        <!-- Add icon library -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1525748822304-6807cb1348ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="Tommy" style="width:30%">
+            <h1>Tommy</h1>
+            <p class="title">Data, ingeniørfag</p>
+            <p>UIA - Grimstad</p>
+            <p><button class="changebutton">Change</button></p>
+        </div>
+        <hr>
+        <p class="center" style="font-size: 25px"><strong>My events</strong></p>
+        <form action="index.html">
+        <button class="eventborder" style="line-height: 3px">
+            <p class="center"><strong>12.11.2021</strong></p>
+            <p><strong>Event</strong>: Studentfest</p>
+            <p><strong>Organizer</strong>: UIA</p>
+            &nbsp;
+            <p class="center"><strong>Click for more info</strong></p>
+        </button>
+        </form>
+
+        <nav class="nav">
+            <a href="hovedside.html" class="NavKnapp active">
+                <span class="material-icons">home</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Homepage</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="#" class="NavKnapp">
+                <span class="material-icons">add_box</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Add Event</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="#" class="NavKnapp">
+                <span class="material-icons">favorite</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Favorites</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="#" class="NavKnapp">
+                <span class="material-icons">account_box</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Profile</span> <!--Navnet på navbar knappene-->
+            </a>
+        </nav>
+    </div> <!--Div-elementet for Mobilinnholdet lukkes-->
+</div> <!--Hentet fra w3schools, link:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_device_smartphone -->
+
+
+<script>
+    var skrivUt=document.getElementById("skrivUt");
+    var filterMeny=document.getElementById("filterMeny");
+    var filterArray = filterMeny.options;
+
+    filterMeny.onchange=function(){
+        var indeks=filterMeny.selectedIndex;
+        if(indeks>=1)skrivUt.innerHTML="Filterer etter " +filterArray[indeks].text;
+        else skrivUt.innerHTML="";
+    }
+    filterMeny.style.visibility="visible"
+
+</script>
+</body>
+</html>
