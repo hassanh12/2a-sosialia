@@ -51,6 +51,7 @@
     width: 320px;
     height: 550px;
     background: white;
+    overflow: hidden;
 }
 .nav{
     background-color: white;
