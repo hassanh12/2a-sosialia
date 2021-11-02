@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hjemmesiden med arrangementer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="addEventStyle.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--Hentet fra https://fonts.google.com/icons?selected=Material+Icons-->
+
+</head>
+<body>
+<div class="smartphone bakgrunnsfarge">
+
+    <div id="pageTitle"> ADD EVENT DETAILS</div>
+
+    <form>
+        <table style="width: 100%">
+            <tr> <td class="label"> <label for="eventTitle">Event Title</label>                                                     </td>    </tr>
+            <tr> <td colspan="3"> <input type="text" name="eventTitle" id="eventTitle" maxlength="80" placeholder="Title" required> </td>    </tr>
+
+            <tr> <td class="label"> <label for="address">Address</label>                                                            </td>    </tr>
+            <tr> <td colspan="3"> <input type="text" name="address" id="address" maxlength="80" placeholder="Address" required>     </td>    </tr>
+
+            <tr>
+                <td class="label" style="width: 48%"> <label for="city">City</label></td>
+                <td></td>
+                <td class="label" style="width: 48%"> <label for="date">Date</label></td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="city" name="city">
+                        <option value="" disabled selected> Select City </option>
+                        <option value="kristiansand"> Kristiansand </option>
+                        <option value="grimstad"> Grimstad </option>
+                    </select>
+                </td>
+                <td></td>
+                <td> <input type="date" name="date" id="date" required> </td>
+            </tr>
+
+            <tr>
+                <td class="label"> <label for="category">Category</label>
+                <td></td>
+                <td class="label"> <label for="nop">Number of participants</label>
+            </tr>
+            <tr>
+                <td>
+                    <select id="category" name="category">
+                        <option value="" disabled selected> Select category </option>
+                        <option value="sport"> Sport </option>
+                        <option value="study"> Study </option>
+                        <option value="social"> Social </option>
+                        <option value="party"> Party </option>
+                        <option value="festival"> Festival </option>
+                    </select>
+                </td>
+                <td></td>
+                <td> <input type="number" name="nop" id="nop" max="9999" placeholder="Input maximum capacity" required> </td>
+            </tr>
+
+
+            <tr> <td class="label"> <label for="eventInfo">Event description</label>                                                                                     </td></tr>
+            <tr> <td colspan="3" style="text-align: center"> <textarea class="eventDescription" id="eventInfo" name="eventInfo" maxlength="500" placeholder="Extra/useful information about the event" required></textarea>  </td></tr>
+
+
+
+            <tr>
+                <td colspan="3">
+                    <input type="submit" id="submit" value="Create Event">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+
+
+        <!-- Navbar -->
+        <nav class="nav">
+            <a href="hovedside.html" class="NavKnapp">
+                <span class="material-icons">home</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Homepage</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="addEvent.html" class="NavKnapp active">
+                <span class="material-icons">add_box</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Add Event</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="#" class="NavKnapp">
+                <span class="material-icons">favorite</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Favorites</span> <!--Navnet på navbar knappene-->
+
+            </a>
+            <a href="profile.html" class="NavKnapp">
+                <span class="material-icons">account_box</span> <!--Bilde ikone på navbaren-->
+                <span class="IconName">Profile</span> <!--Navnet på navbar knappene-->
+            </a>
+        </nav>
+</div> <!--Hentet fra w3schools, link:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_device_smartphone -->
+
+
+
+
+
+<script>
+
+        // From https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch (seen 2021-09-27)
+        // Example POST method implementation using fetch:
+        async function postData(url = '', data = {}) {
+            // Default options are marked with *
+            const response = await fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache,only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json',
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer,*no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify(data) // body data type must match"Content-Type"header
+            });
+            return response.json(); // parses JSON response into native JavaScriptobjects
+        }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+        const formJSON = Object.fromEntries(data.entries());
+        postData('https://bacit.info/', formJSON)
+            .then(data => {
+                console.log(JSON.stringify(data, null, 2))
+            });
+    }
+    const form = document.querySelector('form');
+    form.addEventListener('submit', handleSubmit);
+</script>
+</body>
+</html>

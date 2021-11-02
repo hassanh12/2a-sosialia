@@ -13,7 +13,7 @@
 <body>
 
 <div class="smartphone">
-    <div class="content"> <!--Starten av alt som i mobil-->
+    <div class="content bakgrunnsfarge"> <!--Starten av alt som i mobil-->
 
         <p class="center" style="font-size: 25px"><strong>My profile</strong></p>
 
@@ -26,7 +26,9 @@
             <p>UIA - Grimstad</p>
             <p><button class="changebutton">Change</button></p>
         </div>
+
         <hr>
+
         <p class="center" style="font-size: 25px"><strong>My events</strong></p>
         <form action="EventInfo.html">
         <button class="eventborder" style="line-height: 3px">
@@ -44,7 +46,7 @@
                 <span class="IconName">Homepage</span> <!--Navnet på navbar knappene-->
 
             </a>
-            <a href="#" class="NavKnapp">
+            <a href="addEvent.html" class="NavKnapp">
                 <span class="material-icons">add_box</span> <!--Bilde ikone på navbaren-->
                 <span class="IconName">Add Event</span> <!--Navnet på navbar knappene-->
 
@@ -64,17 +66,8 @@
 
 
 <script>
-    var skrivUt=document.getElementById("skrivUt");
-    var filterMeny=document.getElementById("filterMeny");
-    var filterArray = filterMeny.options;
-
-    filterMeny.onchange=function(){
-        var indeks=filterMeny.selectedIndex;
-        if(indeks>=1)skrivUt.innerHTML="Filterer etter " +filterArray[indeks].text;
-        else skrivUt.innerHTML="";
-    }
-    filterMeny.style.visibility="visible"
 
 </script>
+
 </body>
 </html>
