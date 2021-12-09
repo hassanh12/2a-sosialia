@@ -28,6 +28,8 @@
             <p id="skrivUt"></p>
         </div>
 
+        <div id="main"> <!-- tom div som blir fyllt av url-events -->
+=======
         <div class="events elementBakgrunnsfarge">
             <table class="eventsTable" style="width: 100%">
                 <tr>
@@ -73,6 +75,103 @@
 
 
 
+
+
+<script>
+
+    let events = []
+
+    const urler = ['https://bacit.info/hwr/20211102062705-e7160661b36297c442204af72e640318.json',
+        'https://bacit.info/hwr/20211102075440-f43946d975a0cde3f7cd84f8f59820dd.json',
+        'https://bacit.info/hwr/20211102075752-700e1829bae5b8e969f9e0b8a48f4d1b.json',
+        'https://bacit.info/hwr/20211102080220-e9f67ba52459de2ebbf9e489f42e1751.json'
+    ]
+
+    Promise.all( //w3schools.com/js/js_promise.asp,   IKKE ASYNC
+        urler.map( //kartlegger alle linkene i 'urler' for å fetche de (nedenfor) https://www.w3schools.com/jsref/jsref_map.asp
+            (url) =>
+                fetch(url)
+                    .then((res) => res.json())
+                    .then((res) => events.push(res)) //dytter inn dataen i events arrayen (som du kan se øverst i console.loggen)
+        )
+    )
+        .then(() => {
+            console.log(events) //logger objektene/personene fra brukerData i konsollen
+            events.forEach(object => makeEventCards(object)) //for hver event i listen "events" -> lag div/event på homepage
+        })
+
+        .catch((err) => {
+            alert('Feil ved innhenting av data') // Alert("error") viser hva som kommer opp dersom det er en error, inne i alert("") kan det stå hva som helst, men det må være forstålig, derfor valgte vi error
+        })
+
+
+    function makeEventCards(object){ //funskjon for å lage event boksene på hjemme-siden
+        console.log(object)
+
+
+        let eventDiv = document.createElement("div");                   //lager tom div
+        eventDiv.setAttribute('class', 'events elementBakgrunnsfarge'); //gir class til div-en (lett styling istedenfor mange "div.style.width = '200'; div.style.color = 'red'; " etc)
+
+        let table = document.createElement("table");                    //genererer tabellen alt ligger i
+        table.setAttribute('class', 'eventsTable');
+
+        let tr = document.createElement("tr");                          //hoved-raden alt ligger i
+
+        let tdDato = document.createElement("td");                      //venstre kolonne
+        tdDato.style.width = "25%";
+        tdDato.innerHTML = object.date                                  //legger inn text/verdi (object.date) i venstre kolonne     | "object.date" betyr eventen(object) sin dato-verdi(.date)
+
+        let tdTitle = document.createElement("td");                     //midterste kolonne
+        tdTitle.setAttribute('class', 'eventbarriere')
+        tdTitle.innerHTML = object.eventTitle
+
+
+        let tdRight = document.createElement("td");                     //høyre kolonne
+        tdRight.style.width = "25%";
+
+        let tableRight = document.createElement("table");               //ny tabell (for å ha flere rader), som vi skal putte i høyre kolonne
+        tableRight.setAttribute('class', 'eventsTableRight')
+
+        let trCampus = document.createElement("tr");                    //de forskjellige radene som skal være i høyre kolonne
+        let tdCampus = document.createElement("td");                    //lager kolonne for raden, dette må til selvom det bare er én kolonne per rad
+        tdCampus.innerHTML = object.city
+        trCampus.appendChild(tdCampus)                                  //her "appender" vi tdCampus kolonnen inn i trCampus raden. Append/appendchild legger/putter bakerste-nevnt "child" inn i "parent" sitt scope
+                                                                        //altså: trCampus(parent) .append (tdCampus(child)) blir tdCampus lagt inn som en indent i scopet til trCampus (se modell/prototype nedenfor)
+        let trCategory = document.createElement("tr");
+        let tdCategory = document.createElement("td");
+        tdCategory.innerHTML = object.category
+        trCategory.appendChild(tdCategory)
+
+        let trPeople = document.createElement("tr");
+        let tdPeople = document.createElement("td");
+        tdPeople.innerHTML = object.nop
+        trPeople.appendChild(tdPeople)
+
+        //her starter append, se prototype nedenfor for oversikt over scopes
+        tableRight.append(trCampus, trCategory, trPeople)               //appender campus, categori og deltagere inn i høyre kolonne-tabell
+        tdRight.appendChild(tableRight)                                 //appender høyre kolonne-tabell inn i kolonnen
+        tr.append(tdDato, tdTitle, tdRight);                            //appender dato, tittel og høyre kolonne inn i raden (dekker hele diven)
+        table.appendChild(tr);                                          //appender raden i hoved-tabellen
+        eventDiv.appendChild(table);                                    //appender tabellen inn i div-en
+        document.getElementById("main").appendChild(eventDiv);          //appender div inn i "main" div (altså hoved-parten av homescreen
+    }
+
+    /*<div class="events elementBakgrunnsfarge">                 prototype av event boks         |  nøkkelord for makeEventCards()
+        <table class="eventsTable">                                                                 table
+            <tr>                                                                                        tr
+                <td style="width: 25%"> dato</td>                                                           tdDate
+                <td class="eventbarriere"> en lang tittel med masse tekst</td>                              tdTitle
+                <td style="width: 25%">                                                                     tdRight
+                    <table class="eventsTableRight">                                                            tableRight
+                        <tr>                                                                                        trCampus
+                            <td> campus</td>                                                                            tdCampus
+                        </tr>
+                        <tr>                                                                                        trCategory
+                            <td> kategori</td>
+                        </tr>
+                        <tr>                                                                                        trPeople
+                            <td> deltagere</td>
+=======
 
 
 <script>
@@ -127,6 +226,20 @@ function makeEventCards(){
                 </td>
             </tr>
         </table>
+
+    </div>*/
+
+    /*urler.forEach(renderJSON);
+        //Skriver ut data på canvaser for en JSON fil.
+        async function renderJSON(item) {
+            //hente json fra serveren
+            await fetch(item, {cache: 'no-cache'})
+                .then(response => response.json())
+                .then(data => {
+                    events.push(data)
+                })
+        }*/
+=======
     </div>
     document.getElementById(events).innerHTML += eventCard*/
 }

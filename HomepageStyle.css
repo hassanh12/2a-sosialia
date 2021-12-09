@@ -114,6 +114,8 @@ body{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
+=======
     border: 1px solid black;
     border-radius: 10px;
     text-align: center;
@@ -121,10 +123,21 @@ body{
 }
 .eventsTable{
     height: 85px;
+    width: 100%;
+}
+.eventsTableRight{
+    height: 60px;
+    width: 100%;
+}
+
+=======
 }
 .eventbarriere{
     border-left: 1px solid black;
     border-right: 1px solid black;
     padding: 0 5px 0 5px;
+    width: 50%;
+    text-align: left;
+=======
 }
 
