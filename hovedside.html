@@ -29,6 +29,22 @@
         </div>
 
         <div id="main"> <!-- tom div som blir fyllt av url-events -->
+=======
+        <div class="events elementBakgrunnsfarge">
+            <table class="eventsTable" style="width: 100%">
+                <tr>
+                    <td style="width: 25%"> dato </td>
+                    <td class="eventbarriere" style="width: 50%"> en lang tittel med masse tekst </td>
+
+                    <td style="width: 25%">
+                        <table>
+                            <tr><td> campus </td></tr>
+                            <tr><td> kategori </td></tr>
+                            <tr><td> deltagere </td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
         </div>
 
 
@@ -155,11 +171,62 @@
                         </tr>
                         <tr>                                                                                        trPeople
                             <td> deltagere</td>
+=======
+
+
+<script>
+
+var events = []
+
+var urler = ['https://bacit.info/hwr/20211102062705-e7160661b36297c442204af72e640318.json',
+    'https://bacit.info/hwr/20211102075440-f43946d975a0cde3f7cd84f8f59820dd.json',
+    'https://bacit.info/hwr/20211102075752-700e1829bae5b8e969f9e0b8a48f4d1b.json',
+    'https://bacit.info/hwr/20211102080220-e9f67ba52459de2ebbf9e489f42e1751.json'
+]
+
+Promise.all( //w3schools.com/js/js_promise.asp,   IKKE ASYNC
+    urler.map( //mapper alle linkene i 'urler' for å fetche de (nedenfor) https://www.w3schools.com/jsref/jsref_map.asp
+        (url) =>
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => events.push(res)) //dytter inn dataen i events arrayen (som du kan se øverst i console.loggen)
+    )
+)
+    .then(() => {
+        console.log(events) //logger objektene/personene fra brukerData i konsollen
+        events.forEach(makeEventCards())
+    })
+
+    .catch((err) => {
+        alert('404 error') // Alert("error") viser hva som kommer opp dersom det er en error, inne i alert("") kan det stå hva som helst, men det må være forstålig, derfor valgte vi error
+    })
+
+
+function makeEventCards(){
+
+    /*let eventCard = ''
+    <div className="events elementBakgrunnsfarge">
+        <table className="eventsTable" style="width: 100%">
+            <tr>
+                <td style="width: 25%"> dato</td>
+                <td className="eventbarriere" style="width: 50%"> en lang tittel med masse tekst</td>
+
+                <td style="width: 25%">
+                    <table>
+                        <tr>
+                            <td> campus</td>
+                        </tr>
+                        <tr>
+                            <td> kategori</td>
+                        </tr>
+                        <tr>
+                            <td> item.nop + </td>
                         </tr>
                     </table>
                 </td>
             </tr>
         </table>
+
     </div>*/
 
     /*urler.forEach(renderJSON);
@@ -172,6 +239,23 @@
                     events.push(data)
                 })
         }*/
+=======
+    </div>
+    document.getElementById(events).innerHTML += eventCard*/
+}
+
+
+
+/*urler.forEach(renderJSON);
+    //Skriver ut data på canvaser for en JSON fil.
+    async function renderJSON(item) {
+        //hente json fra serveren
+        await fetch('https://bacit.info/hwr/' + item + '.json', {cache: 'no-cache'})
+            .then(response => response.json())
+            .then(data => {
+                events.push(data)
+        }
+    }*/
 </script>
 </body>
 </html>

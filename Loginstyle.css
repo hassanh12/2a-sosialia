@@ -2,8 +2,8 @@
 /* The device with borders */
 .smartphone {
     position: relative;
-    width: 320px;
-    height: 550px;
+    width: 375px;
+    height: 667px;
     margin: auto;
     border: 16px black solid;
     border-top-width: 45px;
@@ -38,18 +38,16 @@
 }
 /* The screen (or content) of the device */
 .smartphone .content {
-    width: 320px;
-    height: 550px;
+    width: 375px;
+    height: 667px;
     background: white;
-    width: 320px;
-    height: 550px;
     color: #000;
     top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 10px 50px 50px 50px;
 }
 body {
     margin: 0;
@@ -65,7 +63,7 @@ body {
     padding: 0 0 20px;
     text-align: center;
     width: 133px;
-    height: 45,5px;
+    height: 45.5px;
 }
 
 .content p{
