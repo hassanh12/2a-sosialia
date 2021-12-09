@@ -11,15 +11,11 @@
 
 </head>
 <body>
-<div class="smartphone">
-    <div class="content"> <!--Starten av alt som i mobil-->
-
-        <!-- Logo -->
-        <div style="text-align: center"> <img src="logo_size.jpg" alt="logo" style="width: 76px; height: 76px;"> </div>
-
+<div class="smartphone bakgrunnsfarge">
+    <div class="content">
         <!-- filterknapp -->
         <div>
-            <select id="filterMeny">
+            <select id="filterMeny" class="elementBakgrunnsfarge">
                 <option selected disabled>Filterer</option>
                 <option>Kristiansand</option>
                 <option>Grimstad</option>
@@ -32,106 +28,8 @@
             <p id="skrivUt"></p>
         </div>
 
-
-        <!-- events -->
-        <a href="EventInfo.html"><div class="event">
-            <div class="eventContent eventText">
-                <table class="eventText">
-                    <tbody>
-                    <tr> <td colspan="100%"> <strong> <span>Studentfest</span> </strong> </td> </tr>
-                    <tr> <td colspan="2"> <span>12. Nov</span> </td> </tr>
-                    <tr> <td> <span> 1532 / 2000 participants</span> </td> </tr>
-                    <tr class="categories">
-                        <td> <span> Drinking, Music </span> </td>
-                        <td colspan="100%" class="rAlign"> <span>Grimstad</span> </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div> </a>
-
-        <div class="event" style="clear: both">
-            <div class="eventContent eventText">
-                <table class="eventText">
-                    <tbody>
-                        <tr> <td colspan="100%"> <strong> Kodekurs med Kongen </strong> </td> </tr>
-                        <tr> <td> 25. Oct </td> </tr>
-                        <tr> <td> 68 / 120 participants </td> </tr>
-                        <tr class="categories"> <td> study </td> <td colspan="100%" class="rAlign"> Kristiansand</td> </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div id="main"> <!-- tom div som blir fyllt av url-events -->
         </div>
-
-        <div class="event">
-            <div class="eventContent eventText">
-                <table class="eventText">
-                    <tbody>
-                    <tr> <td colspan="100%"> <strong> Strand Volleyball </strong> </td> </tr>
-                    <tr> <td colspan="2"> <span>28. Oct</span> </td> </tr>
-                    <tr> <td> <span> 17 / 28 participants</span> </td> </tr>
-                    <tr class="categories">
-                        <td> <span> Volleyball </span> </td>
-                        <td colspan="100%" class="rAlign"> <span>Kristiansand</span> </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="event">
-            <div class="eventContent eventText">
-                <table class="eventText">
-                    <tbody>
-                    <tr> <td colspan="100%"> <strong> <span> Kveldstur i Baneheia </span> </strong> </td> </tr>
-                    <tr> <td colspan="2"> <span>30. Oct</span> </td> </tr>
-                    <tr> <td> <span> 7 / - participants </span> </td> </tr>
-                    <tr class="categories">
-                        <td> <span> Walk </span> </td>
-                        <td colspan="100%" class="rAlign"> <span>Kristiansand</span> </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="event">
-            <div class="eventContent eventText">
-                <table class="eventText">
-                    <tbody>
-                    <tr> <td colspan="100%"> <strong> <span> Starwars Marathon </span> </strong> </td> </tr>
-                    <tr> <td colspan="2"> <span> 5. nov </span> </td> </tr>
-                    <tr> <td> <span> 5 / 8 participants </span> </td> </tr>
-                    <tr class="categories">
-                        <td> <span> Social, Movie, chill</span> </td>
-                        <td colspan="100%" class="rAlign"> <span>Grimstad</span> </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-<!--
-        <div class="event">
-            <div class="eventContent eventText">
-                <table class="eventText">
-                    <tbody>
-                        <tr> <td colspan="100%"> <strong> <span>Title</span> </strong> </td> </tr>
-                        <tr> <td colspan="2"> <span>date</span> </td> </tr>
-                        <tr> <td> <span>participants</span> </td> </tr>
-                        <tr class="categories">
-                            <td> <span> category </span> </td>
-                            <td colspan="100%" class="rAlign"> <span>campus</span> </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
--->
-        <!-- placeholder på bunn av events, så ikke siste event ligger "bak" navbaren -->
-        <div id="navSpaceBottom"></div>
-
-
-
 
 
         <!-- Navbar -->
@@ -141,7 +39,7 @@
                 <span class="IconName">Homepage</span> <!--Navnet på navbar knappene-->
 
             </a>
-            <a href="#" class="NavKnapp">
+            <a href="addEvent.html" class="NavKnapp">
                 <span class="material-icons">add_box</span> <!--Bilde ikone på navbaren-->
                 <span class="IconName">Add Event</span> <!--Navnet på navbar knappene-->
 
@@ -160,18 +58,120 @@
 </div> <!--Hentet fra w3schools, link:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_device_smartphone -->
 
 
+
+
+
 <script>
-    var skrivUt=document.getElementById("skrivUt");
-    var filterMeny=document.getElementById("filterMeny");
-    var filterArray = filterMeny.options;
 
-    filterMeny.onchange=function(){
-        var indeks=filterMeny.selectedIndex;
-        if(indeks>=1)skrivUt.innerHTML="Filtrerer etter: " +filterArray[indeks].text;
-        else skrivUt.innerHTML="";
+    let events = []
+
+    const urler = ['https://bacit.info/hwr/20211102062705-e7160661b36297c442204af72e640318.json',
+        'https://bacit.info/hwr/20211102075440-f43946d975a0cde3f7cd84f8f59820dd.json',
+        'https://bacit.info/hwr/20211102075752-700e1829bae5b8e969f9e0b8a48f4d1b.json',
+        'https://bacit.info/hwr/20211102080220-e9f67ba52459de2ebbf9e489f42e1751.json'
+    ]
+
+    Promise.all( //w3schools.com/js/js_promise.asp,   IKKE ASYNC
+        urler.map( //kartlegger alle linkene i 'urler' for å fetche de (nedenfor) https://www.w3schools.com/jsref/jsref_map.asp
+            (url) =>
+                fetch(url)
+                    .then((res) => res.json())
+                    .then((res) => events.push(res)) //dytter inn dataen i events arrayen (som du kan se øverst i console.loggen)
+        )
+    )
+        .then(() => {
+            console.log(events) //logger objektene/personene fra brukerData i konsollen
+            events.forEach(object => makeEventCards(object)) //for hver event i listen "events" -> lag div/event på homepage
+        })
+
+        .catch((err) => {
+            alert('Feil ved innhenting av data') // Alert("error") viser hva som kommer opp dersom det er en error, inne i alert("") kan det stå hva som helst, men det må være forstålig, derfor valgte vi error
+        })
+
+
+    function makeEventCards(object){ //funskjon for å lage event boksene på hjemme-siden
+        console.log(object)
+
+
+        let eventDiv = document.createElement("div");                   //lager tom div
+        eventDiv.setAttribute('class', 'events elementBakgrunnsfarge'); //gir class til div-en (lett styling istedenfor mange "div.style.width = '200'; div.style.color = 'red'; " etc)
+
+        let table = document.createElement("table");                    //genererer tabellen alt ligger i
+        table.setAttribute('class', 'eventsTable');
+
+        let tr = document.createElement("tr");                          //hoved-raden alt ligger i
+
+        let tdDato = document.createElement("td");                      //venstre kolonne
+        tdDato.style.width = "25%";
+        tdDato.innerHTML = object.date                                  //legger inn text/verdi (object.date) i venstre kolonne     | "object.date" betyr eventen(object) sin dato-verdi(.date)
+
+        let tdTitle = document.createElement("td");                     //midterste kolonne
+        tdTitle.setAttribute('class', 'eventbarriere')
+        tdTitle.innerHTML = object.eventTitle
+
+
+        let tdRight = document.createElement("td");                     //høyre kolonne
+        tdRight.style.width = "25%";
+
+        let tableRight = document.createElement("table");               //ny tabell (for å ha flere rader), som vi skal putte i høyre kolonne
+        tableRight.setAttribute('class', 'eventsTableRight')
+
+        let trCampus = document.createElement("tr");                    //de forskjellige radene som skal være i høyre kolonne
+        let tdCampus = document.createElement("td");                    //lager kolonne for raden, dette må til selvom det bare er én kolonne per rad
+        tdCampus.innerHTML = object.city
+        trCampus.appendChild(tdCampus)                                  //her "appender" vi tdCampus kolonnen inn i trCampus raden. Append/appendchild legger/putter bakerste-nevnt "child" inn i "parent" sitt scope
+                                                                        //altså: trCampus(parent) .append (tdCampus(child)) blir tdCampus lagt inn som en indent i scopet til trCampus (se modell/prototype nedenfor)
+        let trCategory = document.createElement("tr");
+        let tdCategory = document.createElement("td");
+        tdCategory.innerHTML = object.category
+        trCategory.appendChild(tdCategory)
+
+        let trPeople = document.createElement("tr");
+        let tdPeople = document.createElement("td");
+        tdPeople.innerHTML = object.nop
+        trPeople.appendChild(tdPeople)
+
+        //her starter append, se prototype nedenfor for oversikt over scopes
+        tableRight.append(trCampus, trCategory, trPeople)               //appender campus, categori og deltagere inn i høyre kolonne-tabell
+        tdRight.appendChild(tableRight)                                 //appender høyre kolonne-tabell inn i kolonnen
+        tr.append(tdDato, tdTitle, tdRight);                            //appender dato, tittel og høyre kolonne inn i raden (dekker hele diven)
+        table.appendChild(tr);                                          //appender raden i hoved-tabellen
+        eventDiv.appendChild(table);                                    //appender tabellen inn i div-en
+        document.getElementById("main").appendChild(eventDiv);          //appender div inn i "main" div (altså hoved-parten av homescreen
     }
-    filterMeny.style.visibility="visible"
 
+    /*<div class="events elementBakgrunnsfarge">                 prototype av event boks         |  nøkkelord for makeEventCards()
+        <table class="eventsTable">                                                                 table
+            <tr>                                                                                        tr
+                <td style="width: 25%"> dato</td>                                                           tdDate
+                <td class="eventbarriere"> en lang tittel med masse tekst</td>                              tdTitle
+                <td style="width: 25%">                                                                     tdRight
+                    <table class="eventsTableRight">                                                            tableRight
+                        <tr>                                                                                        trCampus
+                            <td> campus</td>                                                                            tdCampus
+                        </tr>
+                        <tr>                                                                                        trCategory
+                            <td> kategori</td>
+                        </tr>
+                        <tr>                                                                                        trPeople
+                            <td> deltagere</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>*/
+
+    /*urler.forEach(renderJSON);
+        //Skriver ut data på canvaser for en JSON fil.
+        async function renderJSON(item) {
+            //hente json fra serveren
+            await fetch(item, {cache: 'no-cache'})
+                .then(response => response.json())
+                .then(data => {
+                    events.push(data)
+                })
+        }*/
 </script>
 </body>
 </html>

@@ -1,16 +1,29 @@
-.body{
-    margin: 0 0 55px 0;
+body{
+    font-feature-settings: "liga" 0;
+    font-family: Arial;
+    font-style: normal;
+    line-height: normal;
+    --paragraph:0px;
+    font-size: 13px;
 }
+.bakgrunnsfarge{
+    background-color: rgb(62, 13, 42);
+}
+.elementBakgrunnsfarge{
+    background-color: rgb(200, 16, 46);
+}
+
 /* The device with borders */
 .smartphone {
     position: relative;
-    width: 320px;
-    height: 550px;
+    width: 375px;
+    height: 667px;
     margin: auto;
     border: 16px black solid;
     border-top-width: 45px;
     border-bottom-width: 55px;
     border-radius: 36px;
+    color: white;
 }
 
 /* The horizontal line on the top of the device */
@@ -43,54 +56,15 @@
 
 /* The screen (or content) of the device */
 .smartphone .content {
-    width: 320px;
-    height: 550px;
-    background: white;
-    max-height: 550px;
+    width: 375px;
+    height: 667px;
+    max-height: 667px;
     overflow-y: scroll;
 }
-.event{
-    height: 90px;
-    max-width: 300px;
-    background: white;
-    padding: 5px;
-    margin-bottom: 2px;             /*  avstand mellom event-divs */
-    border: black 2px solid;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-right: auto;             /* sentrering av innhold */
-    margin-left: auto;              /* sentrering av innhold */
 
-}
-.eventContent{
-    display: inline-block;           /* får content til å ligge horisontalt med hverandre */
-    vertical-align: middle;
-    color: black;
-}
-.eventImg{
-    height: 80px;
-    width: 80px;
-    margin-right: 5px;
-    border: black 2px solid;
-    border-radius: 5px;
-}
-.eventText{
-    height: 80px;
-    width: 100%;
-}
-
-.rAlign{
-    text-align: right;
-}
-.categories{
-    color: gray;
-}
-#navSpaceBottom {
-    height: 55px;
-}
 
 .nav{
-    background-color: white;
+    background-color: rgb(200, 16, 46);
     position: absolute;
     display: flex; /*flex for å sikre at ikonene er jevnt fordelt*/
     height: 55px;
@@ -100,9 +74,9 @@
     overflow-x: auto; /*utvide kompatibiliteten og støtter for mindre skjermer,  brukeren kan bla ikonene hvis det er nødvendig*/
 }
 .NavKnapp{
-    color: #5b0e2d;
-    font-family: Calibri;
-    font-size: 10px;
+    color: white;
+    font-family: "serif";
+    font-size: 20px;
     display: flex;
     flex-grow: 1; /*jevnt fordelt beløp over navigasjonsknappene*/
     flex-direction: column; /*gjør at ikonen er over navnet*/
@@ -115,22 +89,51 @@
     -webkit-tap-highlight-color: transparent; /*fjerner blå uthevingsfarge når du klikker på lenken på mobilen*/
     transition: background-color 0.1s ease-in-out; /*Gjør hoveren smooth*/
 }
-.NavKnapp:hover{
-    background-color: white;
+.NavKnapp:hover, input[type=submit]:hover{
+    background-color: maroon;
 }
-.active{
+.active {
     color: black;
 }
+
 .IconName{
     font-size: 16px;
+    color: black;
 }
 
 #filterMeny{
-    background:red;
     color: white;
     font-family: arial;
     font-size: 16px;
     border-radius: 24px;
     padding: 10px;
     margin-left: 5px;
-  }
+}
+
+.events {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
+}
+.eventsTable{
+    height: 85px;
+    width: 100%;
+}
+.eventsTableRight{
+    height: 60px;
+    width: 100%;
+}
+
+.eventbarriere{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0 5px 0 5px;
+    width: 50%;
+    text-align: left;
+}
+
