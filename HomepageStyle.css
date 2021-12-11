@@ -9,9 +9,7 @@ body{
 .bakgrunnsfarge{
     background-color: rgb(62, 13, 42);
 }
-.elementBakgrunnsfarge{
-    background-color: rgb(200, 16, 46);
-}
+
 
 /* The device with borders */
 .smartphone {
@@ -108,9 +106,10 @@ body{
     border-radius: 24px;
     padding: 10px;
     margin-left: 5px;
+    background-color: rgb(200, 16, 46);
 }
 
-.events {
+.eventDiv {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
@@ -119,6 +118,7 @@ body{
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
+    background-color: rgb(200, 16, 46);
 }
 .eventsTable{
     height: 85px;
