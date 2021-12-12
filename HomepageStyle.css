@@ -105,7 +105,8 @@ body{
     font-size: 16px;
     border-radius: 24px;
     padding: 10px;
-    margin-left: 5px;
+    margin: 5px;
+    background-color: rgb(200, 16, 46);
     background-color: rgb(200, 16, 46);
 }
 
@@ -132,7 +133,137 @@ body{
 .eventbarriere{
     border-left: 1px solid black;
     border-right: 1px solid black;
-    padding: 0 5px 0 5px;
+    padding: 10px;
     width: 50%;
     text-align: left;
+}
+
+/*  Modal utforming hentet fra https://www.thatsoftwaredude.com/content/9123/the-simplest-way-to-create-dynamic-modal-pop-ups-in-javascript
+    og flexbox ideer: https://stackoverflow.com/questions/90178/make-a-div-fill-the-height-of-the-remaining-screen-space*/
+.modal {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    border-radius: 20px;
+    background-color: rgb(62, 13, 42);
+    z-index: 60000;
+    display: none;
+    max-height: 80%;
+    box-sizing: border-box;
+    box-shadow: 0 0 25px 5px black;
+}
+
+.modal.on {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.modal-js-overlay {
+    background: #444;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20000;
+    left: 0;
+}
+
+.modal-js-close {
+    position: absolute;
+    bottom: 0px;
+    border: solid 2px rgb(200, 16, 46);
+    background-color: rgb(200, 16, 46);
+    color: black;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    text-align: center;
+    padding: 1px;
+    top: -8px;
+    right: -8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 0 1px 2px black;
+}
+.modalHeader{
+    font-size: 18px;
+    flex: 0 1 auto;
+    padding: 5px 10px;
+    text-align: center;
+}
+.modalMainContent {
+    background-color: rgb(200, 16, 46);
+    border-radius: 5px;
+    padding: 10px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: column;
+    white-space: pre-wrap;
+    max-height: 340px;
+}
+
+.modalMainContent span{
+    color: black;
+    font-weight: bold;
+}
+
+.modalFooter{
+    flex: 0 1 100px;
+    text-align: center;
+    white-space: pre-wrap;
+}
+
+.signUpBtn{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    border: 2px solid black;
+    color: white;
+    font-size: 20px;
+    width: 140px;
+    height: 50px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 5px 3px 0 darkred;
+    background-color: rgb(200, 16, 46);
+}
+.modalDate .modalOrganizer .modalInfo .modalAddress {
+    padding: 10px;
+}
+.modalDate{
+    flex: 1 0 auto;
+}
+.modalOrganizer{
+    flex: 1 0 auto;
+}
+.modalInfoLabel{
+    flex: 0 3 auto;
+    color: black;
+}
+.modalInfo{
+    flex: 5 0 100px;
+    margin: 0 0 5px 0;
+    padding: 5px 8px 5px 8px;
+    background-color: rgb(185, 16, 46);
+    border-radius: 5px;
+    overflow: scroll;
+}
+.modalAddressDiv{
+    flex: 1 0 30px;
+}
+.modalAddress {
+    overflow-x: auto;
+    width: 250px;
+    float: left;
+}
+.mapIcon {
+    height: 30px;
+    width: 30px;
+    float: left;
 }
