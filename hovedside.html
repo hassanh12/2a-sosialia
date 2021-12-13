@@ -59,234 +59,208 @@
 
 <script>
 
-    let events = []
+let events = []
 
-    const urler = ['https://bacit.info/hwr/20211102062705-e7160661b36297c442204af72e640318.json',
-        'https://bacit.info/hwr/20211102075440-f43946d975a0cde3f7cd84f8f59820dd.json',
-        'https://bacit.info/hwr/20211102075752-700e1829bae5b8e969f9e0b8a48f4d1b.json',
-        'https://bacit.info/hwr/20211102080220-e9f67ba52459de2ebbf9e489f42e1751.json'
-    ]
+const urler = ['https://bacit.info/hwr/20211102062705-e7160661b36297c442204af72e640318.json',
+    'https://bacit.info/hwr/20211102075440-f43946d975a0cde3f7cd84f8f59820dd.json',
+    'https://bacit.info/hwr/20211102075752-700e1829bae5b8e969f9e0b8a48f4d1b.json',
+    'https://bacit.info/hwr/20211102080220-e9f67ba52459de2ebbf9e489f42e1751.json'
+]
 
-    Promise.all( //w3schools.com/js/js_promise.asp,   IKKE ASYNC
-        urler.map( //kartlegger alle linkene i 'urler' for å fetche de (nedenfor) https://www.w3schools.com/jsref/jsref_map.asp
-            (url) =>
-                fetch(url)
-                    .then((res) => res.json())
-                    .then((res) => events.push(res)) //dytter inn dataen i events arrayen (som du kan se øverst i console.loggen)
-        )
+Promise.all( //w3schools.com/js/js_promise.asp,   IKKE ASYNC
+    urler.map( //kartlegger alle linkene i 'urler' for å fetche de (nedenfor) https://www.w3schools.com/jsref/jsref_map.asp
+        (url) =>
+            fetch(url)
+                .then((res) => res.json())
+                .then((res) => events.push(res)) //dytter inn dataen i events arrayen (som du kan se øverst i console.loggen)
     )
-        .then(() => {
-            console.log(events) //logger objektene/personene fra brukerData i konsollen
-            events.forEach((object, i) => makeEventCards(object, i)) //for hver event i listen "events" -> lag div/event på homepage
-        })
+)
+    .then(() => {
+        console.log(events) //logger objektene/personene fra brukerData i konsollen
+        events.forEach((object, i) => makeEventCards(object, i)) //for hver event i listen "events" -> lag div/event på homepage
+    })
 
-        .catch((err) => {
-            alert('Feil ved innhenting av data') // Alert("error") viser hva som kommer opp dersom det er en error, inne i alert("") kan det stå hva som helst, men det må være forstålig, derfor valgte vi error
-        })
+    .catch((err) => {
+        alert('Feil ved innhenting av data') // Alert("error") viser hva som kommer opp dersom det er en error, inne i alert("") kan det stå hva som helst, men det må være forstålig, derfor valgte vi error
+    })
 
+//funksjon som viser/sjuler eventCards ut fra filter valg
+function filterActivity(){
+    const activity = document.getElementById("filterMeny").value;
+    const eventer = document.getElementsByClassName("eventDiv");
 
-    function filterActivity(){
-        const activity = document.getElementById("filterMeny").value;
-        const eventer = document.getElementsByClassName("eventDiv");
-
-        for (let e of eventer) {
-            if (e.classList[1] === activity || activity === "all"){
-                e.style.display = "block";
-            } else {
-                e.style.display = "none";
-            }
+    for (let e of eventer) {
+        if (e.classList[1] === activity || activity === "all"){
+            e.style.display = "block";
+        } else {
+            e.style.display = "none";
         }
-
-
-    }
-
-    function makeEventCards(object, index) {        //funskjon for å lage event boksene og modalene på hjemme-siden
-        let title = object.eventTitle;                                  // "object.eventTitle" henter eventen(object) sin tittel(.eventTitle)
-        let category = object.category;                                 // gir alle object attributtene en variabel for lett implementering, som innhold i eventCards eller i Modalene
-        let date = object.date;
-        let campus = object.city;
-        let info = object.eventInfo;
-        let people = object.nop;
-        let address = object.address;
-        console.log()
-
-        let eventDiv = document.createElement("div");                                   //lager tom div
-        eventDiv.setAttribute('class', 'eventDiv ' + category);                         //gir class til div-en, både for styling og "category" for filtrering
-        eventDiv.addEventListener('click', function () {                                //gir div-en en onClick funksjon som åpner modal med id = "modal_" + index (f.eks id = "modal_2")
-            modal('modal_' + index)
-        });
-
-        let table = document.createElement("table");                                    //genererer tabellen alt ligger i
-        table.setAttribute('class', 'eventsTable');
-
-        let tr = document.createElement("tr");                                          //hoved-raden alt ligger i
-
-        let tdDato = document.createElement("td");                      //venstre kolonne
-        tdDato.style.width = "25%";
-        tdDato.innerHTML = date;                                        //legger inn text/verdi (object.date) i venstre kolonne
-
-        let tdTitle = document.createElement("td");                     //midterste kolonne
-        tdTitle.setAttribute('class', 'eventbarriere')
-        tdTitle.innerHTML = title;
-
-
-        let tdRight = document.createElement("td");                     //høyre kolonne
-        tdRight.style.width = "25%";
-
-        let tableRight = document.createElement("table");               //ny tabell (for å ha flere rader), som vi skal putte i høyre kolonne
-        tableRight.setAttribute('class', 'eventsTableRight')
-
-        let trCampus = document.createElement("tr");                    //de forskjellige radene som skal være i høyre kolonne
-        let tdCampus = document.createElement("td");                    //lager kolonne for raden, dette må til selvom det bare er én kolonne per rad
-        tdCampus.innerHTML = campus;
-        trCampus.appendChild(tdCampus)                                  //her "appender" vi tdCampus kolonnen inn i trCampus raden. Append/appendchild legger/putter bakerste-nevnt "child" inn i "parent" sitt scope
-                                                                        //altså: trCampus(parent) .append (tdCampus(child)) blir tdCampus lagt inn som en indent i scopet til trCampus (se modell/prototype nedenfor)
-        let trCategory = document.createElement("tr");
-        let tdCategory = document.createElement("td");
-        tdCategory.innerHTML = category;
-        trCategory.appendChild(tdCategory)
-
-        let trPeople = document.createElement("tr");
-        let tdPeople = document.createElement("td");
-        tdPeople.innerHTML = people;
-        trPeople.appendChild(tdPeople)
-
-        //her starter append, se prototype nedenfor for oversikt over scopes
-        tableRight.append(trCampus, trCategory, trPeople)               //appender campus, categori og deltagere inn i høyre kolonne-tabell
-        tdRight.appendChild(tableRight)                                 //appender høyre kolonne-tabell inn i kolonnen
-        tr.append(tdDato, tdTitle, tdRight);                            //appender dato, tittel og høyre kolonne inn i raden (dekker hele diven)
-        table.appendChild(tr);                                          //appender raden i hoved-tabellen
-        eventDiv.appendChild(table);                                    //appender tabellen inn i div-en
-        document.getElementById("main").appendChild(eventDiv);          //appender div inn i "main" div (altså hoved-parten av homescreen
-
-
-        /*<div class="events elementBakgrunnsfarge">                 prototype av event boks         |  nøkkelord for makeEventCards()
-        <table class="eventsTable">                                                                 table
-            <tr>                                                                                        tr
-                <td style="width: 25%"> dato</td>                                                           tdDate
-                <td class="eventbarriere"> en lang tittel med masse tekst</td>                              tdTitle
-                <td style="width: 25%">                                                                     tdRight
-                    <table class="eventsTableRight">                                                            tableRight
-                        <tr>                                                                                        trCampus
-                            <td> campus</td>                                                                            tdCampus
-                        </tr>
-                        <tr>                                                                                        trCategory
-                            <td> kategori</td>
-                        </tr>
-                        <tr>                                                                                        trPeople
-                            <td> deltagere</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>*/
-
-
-        //lager modal for pop-up av event sin info side / pålogging osv
-        let eventModal = document.createElement("div");                                     //lager tom div
-        eventModal.setAttribute('class', 'modal');                                          //gir class for utforming (og display:none)
-        eventModal.setAttribute('id', 'modal_' + index);                                    //gir id for henting visning av div via modal(id)
-
-        let modalHeader = document.createElement("p");
-        modalHeader.innerHTML = title;
-        modalHeader.className = "modalHeader";                                              //gir class, akkurat som .setAttribute('class', '___')
-
-
-
-        let modalMain = document.createElement("div");
-        modalMain.className = "modalMainContent";
-
-        let modalDate = document.createElement("div");
-        modalDate.innerHTML = "<span>Date: </span>" + date;
-        modalDate.className = "modalDate";
-
-        let modalOrganizer = document.createElement("div");
-        modalOrganizer.innerHTML = "<span>Organizer: </span> empty for now";
-        modalOrganizer.className = "modalOrganizer";
-
-        let modalInfoLabel = document.createElement("div");
-        modalInfoLabel.innerHTML = "<span>About: </span>"
-        modalInfoLabel.className = "modalInfoLabel"
-
-        let modalInfo = document.createElement("div");
-        modalInfo.innerHTML =  info ;
-        modalInfo.className = "modalInfo";
-
-
-        let modalAddressDiv = document.createElement("div");
-        modalAddressDiv.className = "modalAddressDiv";
-        let modalAddress = document.createElement("div");
-        modalAddress.innerHTML = "<span>Address: </span>" + address + ", " + campus;
-        modalAddress.className = "modalAddress";
-
-        let mapIcon = document.createElement("img")
-        mapIcon.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg')      //gir img src til et google maps icon
-        mapIcon.setAttribute('class', 'mapIcon')
-        mapIcon.addEventListener('click', function () {                                 //gir div-en en onClick funksjon som skal vise kart med addresse
-            //funskjon plasserers her
-
-            alert("trykka på kart icon! i event: " + title)
-        });
-
-        modalAddressDiv.append(modalAddress, mapIcon);
-        modalMain.append(modalDate, modalOrganizer, modalInfoLabel, modalInfo, modalAddressDiv);        //appender event informasjon inn i modalContentDiven
-
-
-        let modalFooter = document.createElement("div");
-        modalFooter.className = "modalFooter";
-
-        let signUp = document.createElement("button");
-        signUp.className = "signUpBtn";
-        signUp.innerHTML = "<strong> Sign up </strong>";
-        signUp.addEventListener('click', function () {                                  //gir div-en en onClick funksjon som skal melde seg på (legge seg i profil og øke antall "participants" med 1
-            //funskjon plasseres her
-
-            alert("trykka på sign up! i event: " + title)
-        });
-
-        let modalFooterNop = document.createElement("p")
-        modalFooterNop.innerHTML = "Participants \n0 / " + people;
-
-        modalFooter.append(signUp, modalFooterNop);
-
-
-
-        eventModal.append(modalHeader, modalMain, modalFooter);                         //appender header, main content og footer inn i modalen
-        document.getElementById("content").appendChild(eventModal);                         //appender modalen inn i "content" div (skjerm-delen av telefonen)
     }
 
 
-    function modal(id)                                              //kode inspirasjon hentet fra https://www.thatsoftwaredude.com/content/9123/the-simplest-way-to-create-dynamic-modal-pop-ups-in-javascript
-    {
-        let div = document.getElementById(id);                      // henter hvilken div som skal vises        (can also use a query selector)
-        let parent = document.getElementById("content");            // henter div/parent jeg skal plassere modalen (og bakgrunnen)
-        let bg = document.createElement("div");                     // lager bakgrunns element for tåke effekten -> konsentrasjon på modalen
-        div.setAttribute('class', 'modal on');                      // gir modal som skal vises class "on" for å få "display:block" (altså blir synlig)
-        bg.className = "modal-js-overlay";                          // annen måte å gi classes
-        bg.addEventListener('click', function () {                  // gir bakgrunnen funksjonen til å lokke modalen ved klikk (så man ikke trenger trykke X knappen)
-            modaloff(id)
-        })
+}
 
-        let close = document.createElement("span");                 // lager et span element som skal bli "close" button
-        close.className = "modal-js-close";                         // utforming
-        close.innerHTML = "X";
-        close.addEventListener('click', function () {               // gir close-button funskjonen til å lukke modal (og slette seg selv)
-            modaloff(id)
-        });
+function makeEventCards(object, index) {        //funskjon for å lage event boksene og modalene på hjemme-siden
+    let title = object.eventTitle;                                  // "object.eventTitle" henter eventen(object) sin tittel(.eventTitle)
+    let category = object.category;                                 // gir alle object attributtene en variabel for lett implementering, som innhold i eventCards eller i Modalene
+    let date = object.date;
+    let campus = object.city;
+    let people = object.nop;
 
-        parent.appendChild(bg);                                     // appender bakgrunnen (tåka) inn i content-div
-        div.appendChild(close)                                      // appender close-button inn i modal-div-en
-    }
 
-    function modaloff(id) {                                         // funskjon for å lukke modal
-        let parent = document.getElementById('content');            // henter div hvor modal ligger
-        let div = document.getElementById(id);                      // henter div som blir visst
-        let overlay = parent.querySelector(".modal-js-overlay");    // henter bakgrunn i content-div (vet å hente alt med class "modal-js-overlay")
+    let eventDiv = document.createElement("div");                                   //lager eventkortet sitt div element, som skal romme alt
+    eventDiv.setAttribute('class', 'eventDiv ' + category);                         //gir class til div-en, både for styling og "category" for filtrering
+    eventDiv.addEventListener('click', function () {                                //gir div-en en onClick funksjon som åpner modal med id = "modal_" + index (f.eks id = "modal_2")
+        modal('modal_' + index)
+    });
 
-        div.classList.remove('on');                                 // fjerner "on" classen fra modalen (fjærner synlighet)
-        parent.removeChild(overlay);                                // fjerner bakgrunn fra content-div
-    }
+    //her setter jeg innholdet til eventCardet, med html-kode i string form  (backticks (``) lar deg lage multiline string variabler)
+    eventDiv.innerHTML = `
+    <table class="eventsTable">
+        <tr>
+            <td style="width: 25%"> ` + date + `</td>
+            <td class="eventbarriere"> ` + title + `</td>
+            <td style="width: 25%">
+                <table class="eventsTableRight">
+                    <tr>
+                        <td>` + campus + `</td>
+                    </tr>
+                    <tr>
+                        <td>` + category + `</td>
+                    </tr>
+                    <tr>
+                        <td>` + people + `</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>`;
+
+    document.getElementById("main").appendChild(eventDiv);                              //sender kortet inn i "main" div (altså meste-parten av hovedsiden)
+
+    makeModal(object, index)
+}
+
+
+//funskjon for å lage pop-up vinduene til eventene. kan se
+function makeModal(object, index) {
+    let title = object.eventTitle;                                                      // "object.eventTitle" henter eventen(object) sin tittel(.eventTitle)
+    let date = object.date;
+    let campus = object.city;
+    let info = object.eventInfo;
+    let people = object.nop;
+    let address = object.address;
+    let organizer = "Under Arbeid";
+
+    //lager modal for pop-up av event sin info side / pålogging osv
+    let eventModal = document.createElement("div");                                     //lager tom div
+    eventModal.setAttribute('class', 'modal');                                          //gir class for utforming (og display:none)
+    eventModal.setAttribute('id', 'modal_' + index);                                    //gir id for henting visning av div via modal(id)
+
+    let modalHeader = document.createElement("p");
+    modalHeader.innerHTML = title;
+    modalHeader.className = "modalHeader";                                              //gir class, akkurat som .setAttribute('class', '___')
+
+
+
+    let modalMain = document.createElement("div");
+    modalMain.className = "modalMainContent";
+
+    let modalDate = document.createElement("div");
+    modalDate.innerHTML = "<span>Date: </span>" + date;
+    modalDate.className = "modalDate";
+
+    let modalOrganizer = document.createElement("div");
+    modalOrganizer.innerHTML = "<span>Organizer: </span>" + organizer;
+    modalOrganizer.className = "modalOrganizer";
+
+    let modalInfoLabel = document.createElement("div");
+    modalInfoLabel.innerHTML = "<span>About: </span>"
+    modalInfoLabel.className = "modalInfoLabel"
+
+    let modalInfo = document.createElement("div");
+    modalInfo.innerHTML =  info ;
+    modalInfo.className = "modalInfo";
+
+
+    let modalAddressDiv = document.createElement("div");
+    modalAddressDiv.className = "modalAddressDiv";
+    let modalAddress = document.createElement("div");
+    modalAddress.innerHTML = "<span>Address: </span>" + address + ", " + campus;
+    modalAddress.className = "modalAddress";
+
+    let mapIcon = document.createElement("img")
+    mapIcon.setAttribute('src', 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg')      //gir img src til et google maps icon
+    mapIcon.setAttribute('class', 'mapIcon')
+    mapIcon.addEventListener('click', function () {                                 //gir div-en en onClick funksjon som skal vise kart med addresse
+        //funskjon plasserers her
+
+        alert("trykka på kart icon! i event: " + title)
+    });
+
+    modalAddressDiv.append(modalAddress, mapIcon);
+    modalMain.append(modalDate, modalOrganizer, modalInfoLabel, modalInfo, modalAddressDiv);        //appender event informasjon inn i modalContentDiven
+
+
+    let modalFooter = document.createElement("div");
+    modalFooter.className = "modalFooter";
+
+    let signUp = document.createElement("button");
+    signUp.className = "signUpBtn";
+    signUp.innerHTML = "<strong> Sign up </strong>";
+    signUp.addEventListener('click', function () {                                  //gir div-en en onClick funksjon som skal melde seg på (legge seg i profil og øke antall "participants" med 1
+        //funskjon plasseres her
+
+        alert("trykka på sign up! i event: " + title)
+    });
+
+    let modalFooterNop = document.createElement("p")
+    modalFooterNop.innerHTML = "Participants \n0 / " + people;
+
+    modalFooter.append(signUp, modalFooterNop);
+
+
+
+    eventModal.append(modalHeader, modalMain, modalFooter);                         //appender header, main content og footer inn i modalen
+    document.getElementById("content").appendChild(eventModal);                         //appender modalen inn i "content" div (skjerm-delen av telefonen)
+}
+
+//kode for å vise spesifik modal, lage bakgrunn og lage en "close"-knapp
+function modal(id)                                              //kode inspirasjon hentet fra https://www.thatsoftwaredude.com/content/9123/the-simplest-way-to-create-dynamic-modal-pop-ups-in-javascript
+{
+    let div = document.getElementById(id);                      // henter hvilken div som skal vises
+    let parent = document.getElementById("content");            // henter div/parent jeg skal plassere modalen (og bakgrunnen)
+    let bg = document.createElement("div");                     // lager element (div) for tåke/dim-effekten i bakgrunn av modalen
+    div.setAttribute('class', 'modal on');                      // gir modal class "on" for å synlig (går fra display:none -> display:flex)
+    bg.className = "modal-js-overlay";                          // annen måte å gi classes
+
+
+    bg.addEventListener('click', function () {                  // gir bakgrunnen funksjonen til å lokke modalen ved klikk (så man ikke trenger trykke X knappen)
+        modaloff(id)
+    })
+
+    let close = document.createElement("span");                 // lager et span element som skal bli "close" button (for de som ikke vet man kan trykke på siden)
+    close.className = "modal-js-close";                         // utforming
+    close.innerHTML = "X";
+    close.addEventListener('click', function () {               // gir close-button funskjonen til å lukke modal (og slette seg selv)
+        modaloff(id)
+    });
+
+    parent.appendChild(bg);                                     // appender bakgrunnen (tåka) inn i content-div
+    div.appendChild(close)                                      // appender close-button inn i modal-div-en
+}
+
+//funksjon for å lukke modal
+function modaloff(id) {                                         // funskjon for å lukke modal
+    let parent = document.getElementById('content');            // henter div hvor modal ligger
+    let div = document.getElementById(id);                      // henter div som blir visst
+    let overlay = parent.querySelector(".modal-js-overlay");    // henter bakgrunn i content-div (vet å hente alt med class "modal-js-overlay")
+    let closeBtn = parent.querySelector(".modal-js-close");     // henter 'close'-knapp i content-div (vet å hente alt med class "modal-js-overlay")
+
+    div.classList.remove('on');                                 // fjerner "on" classen fra modalen (fjærner synlighet)
+    div.removeChild(closeBtn);                                  // fjerner 'close'-knapp fra modal-div
+    parent.removeChild(overlay);                                // fjerner bakgrunn fra content-div
+}
 
 
 </script>
