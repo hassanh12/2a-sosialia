@@ -1,3 +1,9 @@
+:root{  /* Dette er deklarering av globale variabler i css. Bare for lett endring av farge. https://www.w3schools.com/css/css3_variables.asp */
+    --Main: rgb(200, 16, 46);    /* samme rød-farge som UIA logo */
+    --MainBG: rgb(62, 13, 42);   /* mørk farge som parrer bra med Main fargen */
+}
+
+
 body{
     font-feature-settings: "liga" 0;
     font-family: Arial;
@@ -7,7 +13,7 @@ body{
     font-size: 13px;
 }
 .bakgrunnsfarge{
-    background-color: rgb(62, 13, 42);
+    background-color: var(--MainBG);
 }
 
 
@@ -60,9 +66,9 @@ body{
     overflow-y: scroll;
 }
 
-
+/* Navigation bar css */
 .nav{
-    background-color: rgb(200, 16, 46);
+    background-color: var(--Main);
     position: absolute;
     display: flex; /*flex for å sikre at ikonene er jevnt fordelt*/
     height: 55px;
@@ -71,6 +77,8 @@ body{
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     overflow-x: auto; /*utvide kompatibiliteten og støtter for mindre skjermer,  brukeren kan bla ikonene hvis det er nødvendig*/
 }
+
+/* knappene på nav-baren */
 .NavKnapp{
     color: white;
     font-family: "serif";
@@ -87,13 +95,15 @@ body{
     -webkit-tap-highlight-color: transparent; /*fjerner blå uthevingsfarge når du klikker på lenken på mobilen*/
     transition: background-color 0.1s ease-in-out; /*Gjør hoveren smooth*/
 }
+/* hover over nav-bar knapp */
 .NavKnapp:hover, input[type=submit]:hover{
     background-color: maroon;
 }
+/* klasse for å vise (på nav-baren) hvilken side som er åpen */
 .active {
     color: black;
 }
-
+/* text på nav-baren */
 .IconName{
     font-size: 16px;
     color: black;
@@ -106,8 +116,7 @@ body{
     border-radius: 24px;
     padding: 10px;
     margin: 5px;
-    background-color: rgb(200, 16, 46);
-    background-color: rgb(200, 16, 46);
+    background-color: var(--Main);
 }
 
 .eventDiv {
@@ -119,7 +128,7 @@ body{
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
-    background-color: rgb(200, 16, 46);
+    background-color: var(--Main);
 }
 .eventsTable{
     height: 85px;
@@ -148,7 +157,7 @@ body{
     margin-right: 10%;
     width: 80%;
     border-radius: 20px;
-    background-color: rgb(62, 13, 42);
+    background-color: var(--MainBG);
     z-index: 60000;
     display: none;
     max-height: 80%;
@@ -176,8 +185,8 @@ body{
 .modal-js-close {
     position: absolute;
     bottom: 0px;
-    border: solid 2px rgb(200, 16, 46);
-    background-color: rgb(200, 16, 46);
+    border: solid 2px var(--Main);
+    background-color: var(--Main);
     color: black;
     border-radius: 50%;
     height: 16px;
@@ -198,7 +207,7 @@ body{
     text-align: center;
 }
 .modalMainContent {
-    background-color: rgb(200, 16, 46);
+    background-color: var(--Main);
     border-radius: 5px;
     padding: 10px;
     flex: 1 1 auto;
@@ -209,7 +218,7 @@ body{
 }
 
 .modalMainContent span{
-    color: black;
+    color: #303030;
     font-weight: bold;
 }
 
@@ -231,7 +240,7 @@ body{
     border-radius: 14px;
     text-align: center;
     box-shadow: 0 5px 3px 0 darkred;
-    background-color: rgb(200, 16, 46);
+    background-color: var(--Main);
 }
 .modalDate .modalOrganizer .modalInfo .modalAddress {
     padding: 10px;
@@ -252,13 +261,12 @@ body{
     padding: 5px 8px 5px 8px;
     background-color: rgb(185, 16, 46);
     border-radius: 5px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 .modalAddressDiv{
     flex: 1 0 30px;
 }
 .modalAddress {
-    overflow-x: auto;
     width: 250px;
     float: left;
 }
@@ -267,3 +275,4 @@ body{
     width: 30px;
     float: left;
 }
+
