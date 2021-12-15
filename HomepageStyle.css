@@ -1,22 +1,15 @@
-:root{  /* Dette er deklarering av globale variabler i css. Bare for lett endring av farge. https://www.w3schools.com/css/css3_variables.asp */
-    --Main: rgb(200, 16, 46);    /* samme rød-farge som UIA logo */
-    --MainBG: rgb(62, 13, 42);   /* mørk farge som parrer bra med Main fargen */
-}
-
-
 body{
     font-feature-settings: "liga" 0;
-    font-family: Arial;
+    font-family: sans-serif;
     font-style: normal;
+    font-weight: bold;
     line-height: normal;
     --paragraph:0px;
-    font-size: 13px;
+    font-size: 14px;
 }
 .bakgrunnsfarge{
-    background-color: var(--MainBG);
+    background-color: rgb(62, 13, 42);
 }
-
-
 /* The device with borders */
 .smartphone {
     position: relative;
@@ -66,24 +59,21 @@ body{
     overflow-y: scroll;
 }
 
-/* Navigation bar css */
+
 .nav{
-    background-color: var(--Main);
+    background-color: rgb(200, 16, 46);
     position: absolute;
     display: flex; /*flex for å sikre at ikonene er jevnt fordelt*/
     height: 55px;
     bottom: 0;
-    font-weight: bold;
     width: 100%;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     overflow-x: auto; /*utvide kompatibiliteten og støtter for mindre skjermer,  brukeren kan bla ikonene hvis det er nødvendig*/
 }
-
-/* knappene på nav-baren */
 .NavKnapp{
     color: white;
     font-family: "serif";
-    font-size: 20px;
+    font-size: 14px;
     display: flex;
     flex-grow: 1; /*jevnt fordelt beløp over navigasjonsknappene*/
     flex-direction: column; /*gjør at ikonen er over navnet*/
@@ -96,190 +86,67 @@ body{
     -webkit-tap-highlight-color: transparent; /*fjerner blå uthevingsfarge når du klikker på lenken på mobilen*/
     transition: background-color 0.1s ease-in-out; /*Gjør hoveren smooth*/
 }
-/* hover over nav-bar knapp */
 .NavKnapp:hover, input[type=submit]:hover{
     background-color: maroon;
 }
-/* klasse for å vise (på nav-baren) hvilken side som er åpen */
-.active {
+.active{
     color: black;
 }
-
-/* text på nav-baren */
 .IconName{
     font-size: 16px;
     color: black;
 }
 
-#filterMeny{
-    color: white;
-    font-family: arial;
-    font-size: 16px;
-    border-radius: 24px;
-    padding: 10px;
-    margin: 5px;
-    background-color: var(--Main);
-}
 
-.eventDiv {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    border: 1px solid black;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
-    background-color: var(--Main);
-}
-.eventsTable{
-    height: 85px;
+
+
+/* utforming av input feltene, referanse: https://www.w3schools.com/css/css_form.asp  */
+input[type=text], input[type=date], input[type=number], select {
     width: 100%;
-}
-.eventsTableRight{
-    height: 60px;
-    width: 100%;
-}
-
-.eventbarriere{
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    padding: 10px;
-    width: 50%;
-    text-align: left;
-}
-
-
-
-
-
-/*  Modal utforming hentet fra https://www.thatsoftwaredude.com/content/9123/the-simplest-way-to-create-dynamic-modal-pop-ups-in-javascript
-    og flexbox ideer: https://stackoverflow.com/questions/90178/make-a-div-fill-the-height-of-the-remaining-screen-space*/
-.modal {
-    position: absolute;
-    top: 10%;
-    bottom: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
-    border-radius: 20px;
-    background-color: var(--MainBG);
-    z-index: 60000;
-    display: none;
-    max-height: 80%;
+    padding: 12px 5px;
+    display: inline-block;
+    border: 1px solid rgb(200, 16, 46);
+    border-radius: 4px;
     box-sizing: border-box;
-    box-shadow: 0 0 25px 5px black;
 }
 
-.modal.on {
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-}
-
-.modal-js-overlay {
-    background: #444;
-    opacity: .8;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 20000;
-    left: 0;
-}
-
-.modal-js-close {
-    position: absolute;
-    bottom: 0px;
-    border: solid 2px var(--Main);
-    background-color: var(--Main);
-    color: black;
-    border-radius: 50%;
-    height: 16px;
-    width: 16px;
-    text-align: center;
-    padding: 1px;
-    top: -8px;
-    right: -8px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    box-shadow: 0 0 1px 2px black;
-}
-.modalHeader{
-    font-size: 18px;
-    flex: 0 1 auto;
-    padding: 5px 10px;
-    text-align: center;
-}
-.modalMainContent {
-    background-color: var(--Main);
-    border-radius: 5px;
-    padding: 10px;
-    flex: 1 1 auto;
-    display: flex;
-    flex-flow: column;
-    max-height: 340px;
-}
-
-.modalMainContent span{
-    color: #303030;
-    font-weight: bold;
-}
-
-.modalFooter{
-    flex: 0 1 100px;
-    text-align: center;
-    white-space: pre-wrap;
-}
-
-.signUpBtn{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15px;
-    border: 2px solid black;
-    color: white;
-    font-size: 20px;
-    width: 140px;
-    height: 50px;
-    border-radius: 14px;
-    text-align: center;
-    box-shadow: 0 5px 3px 0 darkred;
-    background-color: var(--Main);
-}
-
-.modalDate .modalOrganizer .modalInfo .modalAddress {
-    padding: 10px;
-}
-.modalDate{
-    flex: 1 0 auto;
-}
-.modalOrganizer{
-    flex: 1 0 auto;
-}
-.modalInfoLabel{
-    flex: 0 3 auto;
-    color: black;
-}
-.modalInfo{
-    flex: 5 0 100px;
-    margin: 0 0 5px 0;
-    padding: 5px 8px 5px 8px;
-    background-color: rgb(185, 16, 46);
-    border-radius: 5px;
+.eventDescription {
+    height: 100px;
+    width: 96%;
+    padding: 10px 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
     overflow-y: scroll;
-    white-space: pre-wrap;
-}
-.modalAddressDiv{
-    flex: 1 0 30px;
-}
-.modalAddress {
-    width: 250px;
-    float: left;
-}
-.mapIcon {
-    height: 30px;
-    width: 30px;
-    float: left;
 }
 
+input[type=submit] {
+    width: 100%;
+    background-color: rgb(200, 16, 46);
+    color: white;
+    padding: 20px 20px;
+    margin-top: 4px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    --paragraph:0px;
+    text-transform: uppercase;
+}
+
+
+.label{
+    height: 30px;
+    vertical-align: bottom;
+}
+label{
+    color: white;
+}
+#pageTitle {
+    border-bottom: 1px solid white;
+    padding: 10px;
+    font-size: 20px;
+}
