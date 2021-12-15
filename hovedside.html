@@ -65,8 +65,8 @@ let events = [
         category: "sport",
         date: "2021-11-10",
         eventInfo: "Arrangerer fotballturering på Spicheren, trenger ikke medlemskap for å komme inn.\r\n\r\nOppmøte klokka 18: starter med oppvarming, deretter splitter opp i lag og kjører kamp",
-        signedUp: "13",
-        nop: "22",
+        signedUp: 13,
+        nop: 22,
         city: "Kristiansand",
         address: "Tulleadresse numero dos",
         organizer: "Sverre Sverreson"
@@ -76,8 +76,8 @@ let events = [
         category: "social",
         date: "2021-11-13",
         eventInfo: "Inviterer til koselig Super smash turnering på Kaserneveien. Utleie er allerede betalt, så ingen gebyrer, utenom valgfritt snacks ;)\r\n\r\nOppstart klokka 18 blank, så tar vi det derifra. \r\n\r\nRing XX XX XX XX hvis du har spørsmål",
-        signedUp: "7",
-        nop: "30",
+        signedUp: 7,
+        nop: 30,
         city: "Kristiansand",
         address: "Kaserneveien 32",
         organizer: "Lars Larsen"
@@ -87,8 +87,8 @@ let events = [
         category: "sport",
         date: "2021-11-08",
         eventInfo: "Litt casual volleyball på campus.\r\nTenker vi starter rundt klokka 14:00 og holder på så lenge vi orker.",
-        signedUp: "21",
-        nop: "21",
+        signedUp: 21,
+        nop: 21,
         city: "Kristiansand",
         address: "Tulleadresse 202",
         organizer: "Hedvig Hedvigsdottir"
@@ -98,13 +98,29 @@ let events = [
         category: "party",
         date: "2021-11-27",
         eventInfo: "BETA arrangerer en studentfest for alle studenter som går på Dataingeniør linjen i Grimstad. Servering av alkohol og mat i lokalet\r\n\r\nInfo:\r\n18:00: oppmøte + mulighet for å kjøpe alkohol\r\n20:00: Mulighet for å kjøpe mat\r\n22:00: Konsert\r\n00:00: Konsert ferdig\r\n02:00: Arrangement stengt\r\n",
-        signedUp: "224",
-        nop: "300",
+        signedUp: 224,
+        nop: 300,
         city: "Grimstad",
         address: "Frivoldveien 11-13, 4877",
         organizer: "UiA Systematicus"
     }
 ]
+let madeEventIndex = 0;  //deklarerer indexen til lagrede events
+let keepGoing = true;   //condition for at loopen under skal fortsette
+
+//for-loop som skjekker om man har laget events før, så man ikke overlapper "keys"/"indexer" og sletter tidligere lagde events.
+while(keepGoing === true){                                                                                          //mens 'keepGoing = 0' så fortsetter den å loope.
+    let madeEventKey ="madeEvent" + madeEventIndex;
+    if (localStorage[madeEventKey]){                                                                                //ser om den finnes en 'madeEvent + newEventIndex' i localStorage. (eks: "madeEvent0")
+        let madeEvent = JSON.parse(localStorage.getItem(madeEventKey));
+        events.push(madeEvent)
+        console.log(madeEventKey)
+    }
+    else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen (keepGoing = false)
+        keepGoing = false; // or 'break'
+    }
+    madeEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
+}                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
 
 console.log(events) //logger objektene/personene fra brukerData i konsollen
 events.forEach((object, i) => makeEventCards(object, i))    //for hver event i listen "events" -> lag div/event på homepage
@@ -175,10 +191,9 @@ function makeModal(object, index) {
     let info = object.eventInfo;
     let people = object.nop;
     let address = object.address;
-    let organizer = "John Doe (me)";                                                    // denne linja skal erstattes med "let organizer = object.organizer" når vi får et bruker-system
-    if ('organizer' in object) {                                                        // skjekker om objectet har en property med navn "oranizer", hvis ikke lar den organizer fornli "john doe" (deg). skal også fjernes når bruker-system blir implementert
-        organizer = object.organizer;
-    }
+    let signedUp = object.signedUp;
+    let organizer = object.organizer;
+
 
     //lager modal for pop-up av event sin info side / pålogging osv
     let eventModal = document.createElement("div");                                     //lager tom div
@@ -212,7 +227,7 @@ function makeModal(object, index) {
 
         <div class="modalFooter">
             <button class="signUpBtn" onclick="alert('trykka på SIGN UP! i event:  ` + title + `')"> <strong> Sign up </strong> </button>
-            <p> Participants: \n0 / ` + people + `</p>
+            <p style="white-space: pre-wrap;"> Participants: \n` + signedUp + ` / ` + people + `</p>
         </div>
     `;
 
