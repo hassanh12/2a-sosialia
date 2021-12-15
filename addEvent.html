@@ -32,8 +32,8 @@
                 <td>
                     <select id="city" name="city">
                         <option value="" disabled selected> Select City </option>
-                        <option value="kristiansand"> Kristiansand </option>
-                        <option value="grimstad"> Grimstad </option>
+                        <option value="Kristiansand"> Kristiansand </option>
+                        <option value="Grimstad"> Grimstad </option>
                     </select>
                 </td>
                 <td></td>
@@ -106,37 +106,38 @@
 
 <script>
 
-        // From https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch (seen 2021-09-27)
-        // Example POST method implementation using fetch:
-        async function postData(url = '', data = {}) {
-            // Default options are marked with *
-            const response = await fetch(url, {
-                method: 'POST', // *GET, POST, PUT, DELETE, etc.
-                mode: 'cors', // no-cors, *cors, same-origin
-                cache: 'no-cache', // *default, no-cache, reload, force-cache,only-if-cached
-                credentials: 'same-origin', // include, *same-origin, omit
-                headers: {
-                    'Content-Type': 'application/json',
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                redirect: 'follow', // manual, *follow, error
-                referrerPolicy: 'no-referrer', // no-referrer,*no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                body: JSON.stringify(data) // body data type must match"Content-Type"header
-            });
-            return response.json(); // parses JSON response into native JavaScriptobjects
-        }
+function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);                                                                            //henter form-en
+    const eventObj = Object.fromEntries(data.entries());                                                                //objectifiserer inputtene til bruker
+    eventObj.organizer = "John Doe (you)";
+    let meldtPaa = Math.floor(parseInt(eventObj.nop) * Math.random() * Math.random());                                  //gir eventen et random (sansynlig lavt) antall meldt på, som er en brøkdel av nop (max antallet).
+    eventObj.signedUp = meldtPaa;
+    console.log(eventObj.signedUp)
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        const data = new FormData(event.target);
-        const formJSON = Object.fromEntries(data.entries());
-        postData('https://bacit.info/', formJSON)
-            .then(data => {
-                console.log(JSON.stringify(data, null, 2))
-            });
-    }
-    const form = document.querySelector('form');
-    form.addEventListener('submit', handleSubmit);
+    //bruker localStorage til å lagre (midlertidig), skjekk ut https://www.section.io/engineering-education/how-to-use-localstorage-with-javascript/
+
+    let newEventIndex = 0;  //dette er indexen til den nye eventen, er bare for å deklarere en variabel i handleSubmit scopet
+    let keepGoing = true;   //condition for at loopen skal fortsette
+
+    //for-loop som skjekker om man har laget events før, så man ikke overlapper "keys"/"indexer" og sletter tidligere lagde events.
+    while(keepGoing === true){                                                                                          //mens 'keepGoing = 0' så fortsetter den å loope.
+        if (localStorage["madeEvent" + newEventIndex]){                                                                 //ser om den finnes en 'madeEvent + newEventIndex' i localStorage allerede. (eks: "madeEvent0")
+            console.log("you've done this before?! wow! you already have " + (newEventIndex + 1) + " event(s) made! ")  //hvis fks 'madeEvent0' finnes -> skriver ut meldingen her
+        }
+        else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen
+            break;
+        }
+        newEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
+    }                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
+    let key = "madeEvent" + newEventIndex;                                                                              //lager var key (fks "madeEvent15") som man kan bruke som ID for å lagre eventen.
+    localStorage.setItem(key, JSON.stringify(eventObj));                                                                //lagrer eventen vår som string, under key (ID) som fks kan være 'madeEvent15'
+
+    console.log("the new event you made will have the key: " + key)
+}
+const form = document.querySelector('form');
+form.addEventListener('submit', handleSubmit);
+
 </script>
 </body>
 </html>
