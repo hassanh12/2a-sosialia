@@ -1,17 +1,15 @@
+:root{  /* Dette er deklarering av globale variabler i css. Bare for lett endring av farge. https://www.w3schools.com/css/css3_variables.asp */
+    --Main: rgb(200, 16, 46);    /* samme rød-farge som UIA logo */
+    --MainBG: rgb(62, 13, 42);   /* mørk farge som parrer bra med Main fargen */
+}
+
 body{
     font-feature-settings: "liga" 0;
-    font-family: sans-serif;
+    font-family: Arial;
     font-style: normal;
-    font-weight: bold;
     line-height: normal;
     --paragraph:0px;
-    font-size: 14px;
-}
-.bakgrunnsfarge{
-    background-color: rgb(62, 13, 42);
-}
-.elementBakgrunnsfarge{
-    background-color: rgb(200, 16, 46);
+    font-size: 13px;
 }
 
 /* The device with borders */
@@ -61,11 +59,12 @@ body{
     height: 667px;
     max-height: 667px;
     overflow-y: scroll;
+    background-color: var(--MainBG);
 }
 
 
 .nav{
-    background-color: rgb(200, 16, 46);
+    background-color: var(--Main);
     position: absolute;
     display: flex; /*flex for å sikre at ikonene er jevnt fordelt*/
     height: 55px;
@@ -102,55 +101,205 @@ body{
     color: black;
 }
 
-
-
 .center {
     text-align: center;
-    line-height: 1px;
 }
-
+#profileHeader{
+    line-height: normal;
+}
 /*css for min profil*/
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 250px;
-    margin: auto;
+.profile {
+    width: 100%;
+    margin: 0 auto auto;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    border-radius: 0 0 10px 10px;
     text-align: center;
-    line-height: 10px;
+    background-color: var(--Main);
+}
+.profile h1, .profile p {
+    margin: 1px;
+}
+.profile img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 4px;
 }
 
 .title {
-    color: grey;
+    color: #303030;
     font-size: 18px;
 }
 
-.changebutton {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-}
-
-a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
+#preSignedUp{
+    display: table;
+    margin: 0 auto;
+    font-weight: bold;
+    color: #c0c1bf;
+    padding: 5px;
 }
 
 button:hover, a:hover {
     opacity: 0.7;
 }
 
-/* border */
-.eventborder {
-    border: 2px solid black;
-    position: relative;
-    right: -10px;
-    border-radius: 5px;
+
+.eventDiv {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
+    background-color: var(--Main);
+}
+.eventsTable{
+    height: 85px;
+    width: 100%;
+}
+.eventsTableRight{
+    height: 60px;
+    width: 100%;
+}
+
+.eventbarriere{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 10px;
+    width: 50%;
+    text-align: left;
+}
+
+
+
+/*  Modal utforming hentet fra https://www.thatsoftwaredude.com/content/9123/the-simplest-way-to-create-dynamic-modal-pop-ups-in-javascript
+    og flexbox ideer: https://stackoverflow.com/questions/90178/make-a-div-fill-the-height-of-the-remaining-screen-space*/
+.modal {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    border-radius: 20px;
+    background-color: var(--MainBG);
+    z-index: 60000;
+    display: none;
+    max-height: 80%;
+    box-sizing: border-box;
+    box-shadow: 0 0 25px 5px black;
+}
+
+.modal.on {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.modal-js-overlay {
+    background: #444;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20000;
+    left: 0;
+}
+
+.modal-js-close {
+    position: absolute;
+    bottom: 0px;
+    border: solid 2px var(--Main);
+    background-color: var(--Main);
+    color: black;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    text-align: center;
+    padding: 1px;
+    top: -8px;
+    right: -8px;
     cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 0 1px 2px black;
+}
+.modalHeader{
+    font-size: 18px;
+    flex: 0 1 auto;
+    padding: 5px 10px;
+    text-align: center;
+}
+.modalMainContent {
+    background-color: var(--Main);
+    border-radius: 5px;
+    padding: 10px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: column;
+    max-height: 340px;
+}
+
+.modalMainContent span{
+    color: #303030;
+    font-weight: bold;
+}
+
+.modalFooter{
+    flex: 0 1 100px;
+    text-align: center;
+}
+
+.signUpBtn{
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    border: 2px solid black;
+    color: white;
+    font-size: 20px;
+    width: 140px;
+    height: 50px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 5px 3px 0 darkred;
+    background-color: var(--Main);
+}
+
+.modalDate .modalOrganizer .modalInfo .modalAddress {
+    padding: 10px;
+}
+.modalDate{
+    flex: 1 0 auto;
+}
+.modalOrganizer{
+    flex: 1 0 auto;
+}
+.modalInfoLabel{
+    flex: 0 3 auto;
+    color: black;
+}
+.modalInfo{
+    flex: 5 0 100px;
+    margin: 0 0 5px 0;
+    padding: 5px 8px 5px 8px;
+    background-color: rgb(185, 16, 46);
+    border-radius: 5px;
+    overflow-y: scroll;
+    white-space: pre-wrap;
+}
+.modalAddressDiv{
+    flex: 1 0 30px;
+}
+.modalAddress {
+    width: 250px;
+    float: left;
+}
+.mapIcon {
+    height: 30px;
+    width: 30px;
+    float: left;
 }

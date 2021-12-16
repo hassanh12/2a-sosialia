@@ -3,7 +3,6 @@
     --MainBG: rgb(62, 13, 42);   /* mørk farge som parrer bra med Main fargen */
 }
 
-
 body{
     font-feature-settings: "liga" 0;
     font-family: Arial;
@@ -110,15 +109,37 @@ body{
     font-size: 16px;
     color: black;
 }
-
+#pageTitle {
+    border-bottom: 1px solid white;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+#search{
+    margin: 10px 5% 10px auto;
+    display: table;
+}
 #filterMeny{
     color: white;
     font-family: arial;
     font-size: 16px;
     border-radius: 24px;
+    border-color: black;
     padding: 10px;
-    margin: 5px;
     background-color: var(--Main);
+    box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
+}
+#sorterMeny{
+    color: white;
+    font-family: arial;
+    font-size: 16px;
+    border-radius: 24px;
+    border-color: black;
+    padding: 10px;
+    margin-left: 10px;
+    background-color: var(--Main);
+    box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
 }
 
 .eventDiv {

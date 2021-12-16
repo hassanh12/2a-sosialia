@@ -13,20 +13,32 @@
 <body>
 <div class="smartphone bakgrunnsfarge">
     <div class="content" id="content">
+
+        <div id="pageTitle"> HOMEPAGE </div>
+
         <!-- filterknapp -->
-        <div>
-            <select id="filterMeny" onchange="filterActivity()">
-                <option value="all"> Alle </option>
-                <option value="sport"> Sport </option>
-                <option value="study"> Study </option>
-                <option value="social"> Social </option>
-                <option value="party"> Party </option>
-                <option value="festival"> Festival </option>
-            </select>
+        <div id="search">
+                <select id="filterMeny" onchange="filterActivity()">
+                    <option disabled selected> Filter</option>
+                    <option value="all"> Alle </option>
+                    <option value="sport"> Sport </option>
+                    <option value="study"> Study </option>
+                    <option value="social"> Social </option>
+                    <option value="party"> Party </option>
+                    <option value="festival"> Festival </option>
+                </select>
+                <select id="sorterMeny" onchange="//er under arbeid">
+                    <option disabled selected> Sort (not yet)</option>
+                    <option value="tid"> Tid </option>
+                    <option value="deltagere"> Deltagere </option>
+                </select>
         </div>
 
-        <div id="main"> </div>                  <!-- tom div som blir fyllt av url-events -->
+        <div id="main"> </div>                  <!-- tom div som blir fyllt av events -->
 
+        <div style="height: 55px; width: auto">
+            <!-- placeholder så man kan se nederste event /og den ikke blir dekket til av nav-bar -->
+        </div>
 
         <!-- Navbar -->
         <nav class="nav">

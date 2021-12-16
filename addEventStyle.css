@@ -1,3 +1,8 @@
+:root{  /* Dette er deklarering av globale variabler i css. Bare for lett endring av farge. https://www.w3schools.com/css/css3_variables.asp */
+    --Main: rgb(200, 16, 46);    /* samme rød-farge som UIA logo */
+    --MainBG: rgb(62, 13, 42);   /* mørk farge som parrer bra med Main fargen */
+}
+
 body{
     font-feature-settings: "liga" 0;
     font-family: sans-serif;
@@ -8,7 +13,7 @@ body{
     font-size: 14px;
 }
 .bakgrunnsfarge{
-    background-color: rgb(62, 13, 42);
+    background-color: var(--MainBG);
 }
 /* The device with borders */
 .smartphone {
@@ -61,7 +66,7 @@ body{
 
 
 .nav{
-    background-color: rgb(200, 16, 46);
+    background-color: var(--Main);
     position: absolute;
     display: flex; /*flex for å sikre at ikonene er jevnt fordelt*/
     height: 55px;
@@ -105,7 +110,7 @@ input[type=text], input[type=date], input[type=number], select {
     width: 100%;
     padding: 12px 5px;
     display: inline-block;
-    border: 1px solid rgb(200, 16, 46);
+    border: 1px solid var(--Main);
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -122,7 +127,7 @@ input[type=text], input[type=date], input[type=number], select {
 
 input[type=submit] {
     width: 100%;
-    background-color: rgb(200, 16, 46);
+    background-color: var(--Main);
     color: white;
     padding: 20px 20px;
     margin-top: 4px;
@@ -149,4 +154,6 @@ label{
     border-bottom: 1px solid white;
     padding: 10px;
     font-size: 20px;
+    text-align: center;
+    font-weight: bold;
 }
