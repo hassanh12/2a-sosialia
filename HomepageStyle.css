@@ -11,10 +11,6 @@ body{
     --paragraph:0px;
     font-size: 13px;
 }
-.bakgrunnsfarge{
-    background-color: var(--MainBG);
-}
-
 
 /* The device with borders */
 .smartphone {
@@ -63,6 +59,7 @@ body{
     height: 667px;
     max-height: 667px;
     overflow-y: scroll;
+    background-color: var(--MainBG);
 }
 
 /* Navigation bar css */
@@ -152,6 +149,7 @@ body{
     text-align: center;
     box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
     background-color: var(--Main);
+    cursor: pointer;
 }
 .eventsTable{
     height: 85px;
@@ -266,6 +264,7 @@ body{
     text-align: center;
     box-shadow: 0 5px 3px 0 darkred;
     background-color: var(--Main);
+    cursor: pointer;
 }
 
 .modalDate .modalOrganizer .modalInfo .modalAddress {
@@ -301,5 +300,6 @@ body{
     height: 30px;
     width: 30px;
     float: left;
+    cursor: pointer;
 }
 

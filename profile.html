@@ -57,94 +57,102 @@
 
 <script>
 
-let events = [
-    {
-        eventTitle: "Fotball turnering",
-        category: "sport",
-        date: "2021-11-10",
-        eventInfo: "Arrangerer fotballturering på Spicheren, trenger ikke medlemskap for å komme inn.\r\n\r\nOppmøte klokka 18: starter med oppvarming, deretter splitter opp i lag og kjører kamp",
-        signedUp: 13,
-        nop: 22,
-        city: "Kristiansand",
-        address: "Tulleadresse numero dos",
-        organizer: "Sverre Sverreson"
-    },
-    {
-        eventTitle: "Super smash turnering",
-        category: "social",
-        date: "2021-11-13",
-        eventInfo: "Inviterer til koselig Super smash turnering på Kaserneveien. Utleie er allerede betalt, så ingen gebyrer, utenom valgfritt snacks ;)\r\n\r\nOppstart klokka 18 blank, så tar vi det derifra. \r\n\r\nRing XX XX XX XX hvis du har spørsmål",
-        signedUp: 7,
-        nop: 30,
-        city: "Kristiansand",
-        address: "Kaserneveien 32",
-        organizer: "Lars Larsen"
-    },
-    {
-        eventTitle: "Volleyball turnering",
-        category: "sport",
-        date: "2021-11-08",
-        eventInfo: "Litt casual volleyball på campus.\r\nTenker vi starter rundt klokka 14:00 og holder på så lenge vi orker.",
-        signedUp: 21,
-        nop: 21,
-        city: "Kristiansand",
-        address: "Tulleadresse 202",
-        organizer: "Hedvig Hedvigsdottir"
-    },
-    {
-        eventTitle: "Fest med BETA - Linjeforeningen for datastudenter",
-        category: "party",
-        date: "2021-11-27",
-        eventInfo: "BETA arrangerer en studentfest for alle studenter som går på Dataingeniør linjen i Grimstad. Servering av alkohol og mat i lokalet\r\n\r\nInfo:\r\n18:00: oppmøte + mulighet for å kjøpe alkohol\r\n20:00: Mulighet for å kjøpe mat\r\n22:00: Konsert\r\n00:00: Konsert ferdig\r\n02:00: Arrangement stengt\r\n",
-        signedUp: 224,
-        nop: 300,
-        city: "Grimstad",
-        address: "Frivoldveien 11-13, 4877",
-        organizer: "UiA Systematicus"
+    let events = [
+        {
+            eventTitle: "Fotball turnering",
+            category: "sport",
+            date: "2021-11-10",
+            eventInfo: "Arrangerer fotballturering på Spicheren, trenger ikke medlemskap for å komme inn.\r\n\r\nOppmøte klokka 18: starter med oppvarming, deretter splitter opp i lag og kjører kamp",
+            participants: 13,
+            nop: 22,
+            city: "Kristiansand",
+            address: "Tulleadresse numero dos",
+            organizer: "Sverre Sverreson"
+        },
+        {
+            eventTitle: "Super smash turnering",
+            category: "social",
+            date: "2021-11-13",
+            eventInfo: "Inviterer til koselig Super smash turnering på Kaserneveien. Utleie er allerede betalt, så ingen gebyrer, utenom valgfritt snacks ;)\r\n\r\nOppstart klokka 18 blank, så tar vi det derifra. \r\n\r\nRing XX XX XX XX hvis du har spørsmål",
+            participants: 7,
+            nop: 30,
+            city: "Kristiansand",
+            address: "Kaserneveien 32",
+            organizer: "Lars Larsen"
+        },
+        {
+            eventTitle: "Volleyball turnering",
+            category: "sport",
+            date: "2021-11-08",
+            eventInfo: "Litt casual volleyball på campus.\r\nTenker vi starter rundt klokka 14:00 og holder på så lenge vi orker.",
+            participants: 21,
+            nop: 21,
+            city: "Kristiansand",
+            address: "Tulleadresse 202",
+            organizer: "Hedvig Hedvigsdottir"
+        },
+        {
+            eventTitle: "Fest med BETA - Linjeforeningen for datastudenter",
+            category: "party",
+            date: "2021-11-27",
+            eventInfo: "BETA arrangerer en studentfest for alle studenter som går på Dataingeniør linjen i Grimstad. Servering av alkohol og mat i lokalet\r\n\r\nInfo:\r\n18:00: oppmøte + mulighet for å kjøpe alkohol\r\n20:00: Mulighet for å kjøpe mat\r\n22:00: Konsert\r\n00:00: Konsert ferdig\r\n02:00: Arrangement stengt\r\n",
+            participants: 224,
+            nop: 300,
+            city: "Grimstad",
+            address: "Frivoldveien 11-13, 4877",
+            organizer: "UiA Systematicus"
+        }
+    ]
+    let madeEventIndex = 0;  //deklarerer indexen til lagrede events
+    let keepGoing = true;   //condition for at loopen under skal fortsette
+
+    //for-loop som skjekker om man har laget events før, så man ikke overlapper "keys"/"indexer" og sletter tidligere lagde events.
+    while(keepGoing === true){                                                                                          //mens 'keepGoing = 0' så fortsetter den å loope.
+        let madeEventKey ="madeEvent" + madeEventIndex;
+        if (localStorage[madeEventKey]){                                                                                //ser om den finnes en 'madeEvent + newEventIndex' i localStorage. (eks: "madeEvent0")
+            let madeEvent = JSON.parse(localStorage.getItem(madeEventKey));
+            events.push(madeEvent)
+            console.log(madeEventKey)
+        }
+        else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen (keepGoing = false)
+            keepGoing = false; // or 'break'
+        }
+        madeEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
     }
-]
-let madeEventIndex = 0;  //deklarerer indexen til lagrede events
-let keepGoing = true;   //condition for at loopen under skal fortsette
 
-//for-loop som skjekker om man har laget events før, så man ikke overlapper "keys"/"indexer" og sletter tidligere lagde events.
-while(keepGoing === true){                                                                                          //mens 'keepGoing = 0' så fortsetter den å loope.
-    let madeEventKey ="madeEvent" + madeEventIndex;
-    if (localStorage[madeEventKey]){                                                                                //ser om den finnes en 'madeEvent + newEventIndex' i localStorage. (eks: "madeEvent0")
-        let madeEvent = JSON.parse(localStorage.getItem(madeEventKey));
-        events.push(madeEvent)
-        console.log(madeEventKey)
+
+    let Show = JSON.parse(localStorage.getItem("signedup")); //henter ut liste (array) med lagra events (index)
+
+    //hvis det er en lagra event, slett "Meld deg på noen events" meldingen
+    if (Show.length !== 0){
+        document.getElementById("preSignedUp").remove()
     }
-    else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen (keepGoing = false)
-        keepGoing = false; // or 'break'
-    }
-    madeEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
-}                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
-
-console.log(events) //logger objektene/personene fra brukerData i konsollen
-//events.forEach((object, i) => makeEventCards(object, i))    //for hver event i listen "events" -> lag div/event på homepage
-//events.forEach((object, i) => makeModal(object, i))         //for hver event i listen "events" -> lag modaler på homepage
+    Show.forEach(index => makeEventCards(events[index], index)) //lager event for av alle lagrede (signed up) events
+    Show.forEach(index => makeModal(events[index], index))      //lager modal for ^
 
 
-function makeEventCards(object, index) {        //funskjon for å lage event boksene og modalene på hjemme-siden
-    let title = object.eventTitle;                                  // "object.eventTitle" henter eventen(object) sin tittel(.eventTitle)
-    let category = object.category;                                 // gir alle object attributtene en variabel for lett implementering, som innhold i eventCards eller i Modalene
-    let date = object.date;
-    let campus = object.city;
-    let people = object.nop;
 
 
-    let eventDiv = document.createElement("div");                                   //lager eventkortet sitt div element, som skal romme alt
-    eventDiv.setAttribute('class', 'eventDiv ' + category);                         //gir class til div-en, både for styling og "category" for filtrering
-    eventDiv.addEventListener('click', function () {                                //gir div-en en onClick funksjon som åpner modal med id = "modal_" + index (f.eks id = "modal_2")
-        modal('modal_' + index)
-    });
+    function makeEventCards(object, index) {        //funskjon for å lage event boksene og modalene på hjemme-siden
+        let title = object.eventTitle;                                  // "object.eventTitle" henter eventen(object) sin tittel(.eventTitle)
+        let category = object.category;                                 // gir alle object attributtene en variabel for lett implementering, som innhold i eventCards eller i Modalene
+        let date = object.date;
+        let campus = object.city;
+        let people = object.nop;
 
-    //her setter jeg innholdet til eventCardet, med html-kode i string form  (backticks (``) lar deg lage multiline string variabler)
-    eventDiv.innerHTML = `
+
+        let eventDiv = document.createElement("div");                                   //lager eventkortet sitt div element, som skal romme alt
+        eventDiv.setAttribute('class', 'eventDiv ' + category);                         //gir class til div-en, både for styling og "category" for filtrering
+        eventDiv.addEventListener('click', function () {                                //gir div-en en onClick funksjon som åpner modal med id = "modal_" + index (f.eks id = "modal_2")
+            modal('modal_' + index)
+        });
+
+        //her setter jeg innholdet til eventCardet, med html-kode i string form  (backticks (``) lar deg lage multiline string variabler)
+        eventDiv.innerHTML = `
         <table class="eventsTable">
             <tr>
                 <td style="width: 25%"> ` + date + `</td>
-                    <td class="eventbarriere"> ` + title + `</td>
+                <td class="eventbarriere"> ` + title + `</td>
                 <td style="width: 25%">
                     <table class="eventsTableRight">
                         <tr>
@@ -161,30 +169,29 @@ function makeEventCards(object, index) {        //funskjon for å lage event bok
             </tr>
         </table>`;
 
-    document.getElementById("main").appendChild(eventDiv);                              //sender kortet inn i "main" div (altså meste-parten av hovedsiden)
-}
+        document.getElementById("main").appendChild(eventDiv);                              //sender kortet inn i "main" div (altså meste-parten av hovedsiden)
+    }
 
 
-//funskjon for å lage pop-up vinduene til eventene. kan se
-function makeModal(object, index) {
-    let title = object.eventTitle;                                                      // "object.eventTitle" henter eventen(object) sin tittel(.eventTitle)
-    let date = object.date;
-    let campus = object.city;
-    let info = object.eventInfo;
-    let people = object.nop;
-    let address = object.address;
-    let signedUp = object.signedUp;
-    let organizer = object.organizer;
+    //funskjon for å lage pop-up vinduene til eventene. kan se
+    function makeModal(object, index) {
+        let title = object.eventTitle;                                                      // "object.eventTitle" henter eventen(object) sin tittel(.eventTitle)
+        let date = object.date;
+        let campus = object.city;
+        let info = object.eventInfo;
+        let people = object.nop;
+        let address = object.address;
+        let participants = object.participants;
+        let organizer = object.organizer;
 
+        //lager modal for pop-up av event sin info side / pålogging osv
+        let eventModal = document.createElement("div");                                     //lager tom div
+        eventModal.setAttribute('class', 'modal');                                          //gir class for utforming (og display:none)
+        eventModal.setAttribute('id', 'modal_' + index);                                    //gir id for henting visning av div via modal(id)
 
-    //lager modal for pop-up av event sin info side / pålogging osv
-    let eventModal = document.createElement("div");                                     //lager tom div
-    eventModal.setAttribute('class', 'modal');                                          //gir class for utforming (og display:none)
-    eventModal.setAttribute('id', 'modal_' + index);                                    //gir id for henting visning av div via modal(id)
-
-    //gir innmaten til eventModal div-en, med string av html kode.
-    //vi bruker ` + variabel + `, men kan også bytte til jQuery -> ${variabel] eller ${object.property}
-    eventModal.innerHTML = `
+        //gir innmaten til eventModal div-en, med string av html kode.
+        //vi bruker ` + variabel + `, men kan også bytte til jQuery -> ${variabel] eller ${object.property}
+        eventModal.innerHTML = `
         <h2 class="modalHeader">` + title + `</h2>
 
         <div class="modalMainContent">
@@ -208,55 +215,79 @@ function makeModal(object, index) {
         </div>
 
         <div class="modalFooter">
-            <button class="signUpBtn" onclick="alert('trykka på SIGN UP! i event:  ` + title + `')"> <strong> Sign up </strong> </button>
-            <p style="white-space: pre-wrap;"> Participants: \n` + signedUp + ` / ` + people + `</p>
+            <button class="signUpBtn" id="btnForEvent` + index + `"> </button>
+            <p style="white-space: pre-wrap;"> Participants: \n` + participants + ` / ` + people + `</p>
         </div>
     `;
+        //eventModal.append(modalHeader, modalMain, modalFooter);                         //appender header, main content og footer inn i modalen
+        document.getElementById("content").appendChild(eventModal);                         //appender modalen inn i "content" div (skjerm-delen av telefonen)
+
+        let targetButton = document.getElementById("btnForEvent" + index);
+        let saved = JSON.parse(localStorage.getItem("signedup"));
+        if (saved.includes(index)) {
+            targetButton.innerText = "Drop event"                                               //gir button text
+            targetButton.addEventListener('click', function () {                                //gir div-en en onClick funksjon som dropper ut av event
+                dropEvent(index);
+            })
+        }
+        else {
+            targetButton.innerText = "Sign up"                                                  //gir button text
+            targetButton.addEventListener('click', function () {                                //gir div-en en onClick funksjon som signer up på event
+                signUp(index);
+            })
+        }
+    }
+
+    //kode for å vise spesifik modal, lage bakgrunn og lage en "close"-knapp
+    function modal(id)                                              //kode inspirasjon hentet fra https://www.thatsoftwaredude.com/content/9123/the-simplest-way-to-create-dynamic-modal-pop-ups-in-javascript
+    {
+        let div = document.getElementById(id);                      // henter hvilken div som skal vises
+        let parent = document.getElementById("content");            // henter div/parent jeg skal plassere modalen (og bakgrunnen)
+        let bg = document.createElement("div");                     // lager element (div) for tåke/dim-effekten i bakgrunn av modalen
+        div.setAttribute('class', 'modal on');                      // gir modal class "on" for å synlig (går fra display:none -> display:flex)
+        bg.className = "modal-js-overlay";                          // annen måte å gi classes
 
 
+        bg.addEventListener('click', function () {                  // gir bakgrunnen funksjonen til å lokke modalen ved klikk (så man ikke trenger trykke X knappen)
+            modaloff(id)
+        })
 
+        let close = document.createElement("span");                 // lager et span element som skal bli "close" button (for de som ikke vet man kan trykke på siden)
+        close.className = "modal-js-close";                         // utforming
+        close.innerHTML = "X";
+        close.addEventListener('click', function () {               // gir close-button funskjonen til å lukke modal (og slette seg selv)
+            modaloff(id)
+        });
 
-    //eventModal.append(modalHeader, modalMain, modalFooter);                         //appender header, main content og footer inn i modalen
-    document.getElementById("content").appendChild(eventModal);                         //appender modalen inn i "content" div (skjerm-delen av telefonen)
-}
+        parent.appendChild(bg);                                     // appender bakgrunnen (tåka) inn i content-div
+        div.appendChild(close)                                      // appender close-button inn i modal-div-en
+    }
 
-//kode for å vise spesifik modal, lage bakgrunn og lage en "close"-knapp
-function modal(id)                                              //kode inspirasjon hentet fra https://www.thatsoftwaredude.com/content/9123/the-simplest-way-to-create-dynamic-modal-pop-ups-in-javascript
-{
-    let div = document.getElementById(id);                      // henter hvilken div som skal vises
-    let parent = document.getElementById("content");            // henter div/parent jeg skal plassere modalen (og bakgrunnen)
-    let bg = document.createElement("div");                     // lager element (div) for tåke/dim-effekten i bakgrunn av modalen
-    div.setAttribute('class', 'modal on');                      // gir modal class "on" for å synlig (går fra display:none -> display:flex)
-    bg.className = "modal-js-overlay";                          // annen måte å gi classes
+    //funksjon for å lukke modal
+    function modaloff(id) {                                         // funskjon for å lukke modal
+        let parent = document.getElementById('content');            // henter div hvor modal ligger
+        let div = document.getElementById(id);                      // henter div som blir visst
+        let overlay = parent.querySelector(".modal-js-overlay");    // henter bakgrunn i content-div (vet å hente alt med class "modal-js-overlay")
+        let closeBtn = parent.querySelector(".modal-js-close");     // henter 'close'-knapp i content-div (vet å hente alt med class "modal-js-overlay")
 
+        div.classList.remove('on');                                 // fjerner "on" classen fra modalen (fjærner synlighet)
+        div.removeChild(closeBtn);                                  // fjerner 'close'-knapp fra modal-div
+        parent.removeChild(overlay);                                // fjerner bakgrunn fra content-div
+    }
 
-    bg.addEventListener('click', function () {                  // gir bakgrunnen funksjonen til å lokke modalen ved klikk (så man ikke trenger trykke X knappen)
-        modaloff(id)
-    })
-
-    let close = document.createElement("span");                 // lager et span element som skal bli "close" button (for de som ikke vet man kan trykke på siden)
-    close.className = "modal-js-close";                         // utforming
-    close.innerHTML = "X";
-    close.addEventListener('click', function () {               // gir close-button funskjonen til å lukke modal (og slette seg selv)
-        modaloff(id)
-    });
-
-    parent.appendChild(bg);                                     // appender bakgrunnen (tåka) inn i content-div
-    div.appendChild(close)                                      // appender close-button inn i modal-div-en
-}
-
-//funksjon for å lukke modal
-function modaloff(id) {                                         // funskjon for å lukke modal
-    let parent = document.getElementById('content');            // henter div hvor modal ligger
-    let div = document.getElementById(id);                      // henter div som blir visst
-    let overlay = parent.querySelector(".modal-js-overlay");    // henter bakgrunn i content-div (vet å hente alt med class "modal-js-overlay")
-    let closeBtn = parent.querySelector(".modal-js-close");     // henter 'close'-knapp i content-div (vet å hente alt med class "modal-js-overlay")
-
-    div.classList.remove('on');                                 // fjerner "on" classen fra modalen (fjærner synlighet)
-    div.removeChild(closeBtn);                                  // fjerner 'close'-knapp fra modal-div
-    parent.removeChild(overlay);                                // fjerner bakgrunn fra content-div
-}
-
+    //funskjon for å "signe up", som lagrer index til eventen i en liste "signedup". Indexene i lista kan bli brukt til å se hvilke som er signed up. Skulle egentlig brukt (set() istedetfor list, men er veldig vanskelig å stringify()/lagre i localStorage)
+    function signUp(key) {
+        localStorage.setItem("signedup", JSON.stringify([...JSON.parse(localStorage.getItem("signedup")), key]));    //hahaha, lang kode-linje, men: henter signedup (list/array som string) fra localstorage -> gjør om fra string til object (array/list) -> legger til key i arrayen, og returnerer "oppdatert liste" -> gjør om oppdatert liste til string -> pusher opp i localStorage
+        location.reload()
+    }
+    //funskjon for å droppe ut av event. som er å ta bort event-indexen fra signedup lista i localStorage
+    function dropEvent(key){
+        const signedups = JSON.parse(localStorage.getItem("signedup"));                 //henter liste fra localStorage
+        localStorage.setItem("signedup", JSON.stringify(                                //skal pushe opp det under som nye "signedup" (altså oppdatert)
+            signedups.filter(function(value, index, arr){return value !== key})         //sletter key fra lista/arrayen
+        ))
+        location.reload()
+    }
 </script>
 </body>
 </html>
