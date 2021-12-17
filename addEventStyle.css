@@ -12,9 +12,7 @@ body{
     --paragraph:0px;
     font-size: 14px;
 }
-.bakgrunnsfarge{
-    background-color: var(--MainBG);
-}
+
 /* The device with borders */
 .smartphone {
     position: relative;
@@ -61,7 +59,7 @@ body{
     width: 375px;
     height: 667px;
     max-height: 667px;
-    overflow-y: scroll;
+    background-color: var(--MainBG);
 }
 
 

@@ -11,68 +11,68 @@
 
 </head>
 <body>
-<div class="smartphone bakgrunnsfarge">
+<div class="smartphone">
+    <div class="content" id="content">
+        <div id="pageTitle"> ADD EVENT DETAILS</div>
 
-    <div id="pageTitle"> ADD EVENT DETAILS</div>
+        <form>
+            <table style="width: 100%">
+                <tr> <td class="label"> <label for="eventTitle">Event Title</label>                                                     </td>    </tr>
+                <tr> <td colspan="3"> <input type="text" name="eventTitle" id="eventTitle" maxlength="80" placeholder="Title" required> </td>    </tr>
 
-    <form>
-        <table style="width: 100%">
-            <tr> <td class="label"> <label for="eventTitle">Event Title</label>                                                     </td>    </tr>
-            <tr> <td colspan="3"> <input type="text" name="eventTitle" id="eventTitle" maxlength="80" placeholder="Title" required> </td>    </tr>
+                <tr> <td class="label"> <label for="address">Address</label>                                                            </td>    </tr>
+                <tr> <td colspan="3"> <input type="text" name="address" id="address" maxlength="80" placeholder="Address" required>     </td>    </tr>
 
-            <tr> <td class="label"> <label for="address">Address</label>                                                            </td>    </tr>
-            <tr> <td colspan="3"> <input type="text" name="address" id="address" maxlength="80" placeholder="Address" required>     </td>    </tr>
+                <tr>
+                    <td class="label" style="width: 48%"> <label for="city">City</label></td>
+                    <td></td>
+                    <td class="label" style="width: 48%"> <label for="date">Date</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="city" name="city">
+                            <option value="" disabled selected> Select City </option>
+                            <option value="Kristiansand"> Kristiansand </option>
+                            <option value="Grimstad"> Grimstad </option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td> <input type="date" name="date" id="date" required> </td>
+                </tr>
 
-            <tr>
-                <td class="label" style="width: 48%"> <label for="city">City</label></td>
-                <td></td>
-                <td class="label" style="width: 48%"> <label for="date">Date</label></td>
-            </tr>
-            <tr>
-                <td>
-                    <select id="city" name="city">
-                        <option value="" disabled selected> Select City </option>
-                        <option value="Kristiansand"> Kristiansand </option>
-                        <option value="Grimstad"> Grimstad </option>
-                    </select>
-                </td>
-                <td></td>
-                <td> <input type="date" name="date" id="date" required> </td>
-            </tr>
-
-            <tr>
-                <td class="label"> <label for="category">Category</label>
-                <td></td>
-                <td class="label"> <label for="nop">Number of participants</label>
-            </tr>
-            <tr>
-                <td>
-                    <select id="category" name="category">
-                        <option value="" disabled selected> Select category </option>
-                        <option value="sport"> Sport </option>
-                        <option value="study"> Study </option>
-                        <option value="social"> Social </option>
-                        <option value="party"> Party </option>
-                        <option value="festival"> Festival </option>
-                    </select>
-                </td>
-                <td></td>
-                <td> <input type="number" name="nop" id="nop" max="9999" placeholder="Input maximum capacity" required> </td>
-            </tr>
-
-
-            <tr> <td class="label"> <label for="eventInfo">Event description</label>                                                                                     </td></tr>
-            <tr> <td colspan="3" style="text-align: center"> <textarea class="eventDescription" id="eventInfo" name="eventInfo" maxlength="500" placeholder="Extra/useful information about the event" required></textarea>  </td></tr>
+                <tr>
+                    <td class="label"> <label for="category">Category</label>
+                    <td></td>
+                    <td class="label"> <label for="nop">Number of participants</label>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="category" name="category">
+                            <option value="" disabled selected> Select category </option>
+                            <option value="sport"> Sport </option>
+                            <option value="study"> Study </option>
+                            <option value="social"> Social </option>
+                            <option value="party"> Party </option>
+                            <option value="festival"> Festival </option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td> <input type="number" name="nop" id="nop" max="9999" placeholder="Input maximum capacity" required> </td>
+                </tr>
 
 
+                <tr> <td class="label"> <label for="eventInfo">Event description</label>                                                                                     </td></tr>
+                <tr> <td colspan="3" style="text-align: center"> <textarea class="eventDescription" id="eventInfo" name="eventInfo" maxlength="500" placeholder="Extra/useful information about the event" required></textarea>  </td></tr>
 
-            <tr>
-                <td colspan="3">
-                    <input type="submit" id="submit" value="Create Event">
-                </td>
-            </tr>
-        </table>
-    </form>
+
+
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" id="submit" value="Create Event">
+                    </td>
+                </tr>
+            </table>
+        </form>
 
 
 
@@ -98,6 +98,7 @@
                 <span class="IconName">Profile</span> <!--Navnet på navbar knappene-->
             </a>
         </nav>
+    </div>
 </div> <!--Hentet fra w3schools, link:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_device_smartphone -->
 
 
@@ -105,37 +106,37 @@
 
 
 <script>
-function handleSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);                                                                            //henter form-en
-    const eventObj = Object.fromEntries(data.entries());                                                                //objectifiserer inputtene til bruker
-    eventObj.organizer = "John Doe (you)";
-    let meldtPaa = Math.floor(parseInt(eventObj.nop) * Math.random() * Math.random());                                  //gir eventen et random (sansynlig lavt) antall meldt på, som er en brøkdel av nop (max antallet).
-    eventObj.signedUp = meldtPaa;
-    console.log(eventObj.signedUp)
+    function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);                                                                            //henter form-en
+        const eventObj = Object.fromEntries(data.entries());                                                                //objectifiserer inputtene til bruker
+        eventObj.organizer = "John Doe (you)";
+        let meldtPaa = Math.floor(parseInt(eventObj.nop) * Math.random() * Math.random());                                  //gir eventen et random (sansynlig lavt) antall meldt på, som er en brøkdel av nop (max antallet).
+        eventObj.participants = meldtPaa;
+        console.log(eventObj.signedUp)
 
-    //bruker localStorage til å lagre (midlertidig), skjekk ut https://www.section.io/engineering-education/how-to-use-localstorage-with-javascript/
+        //bruker localStorage til å lagre (midlertidig), skjekk ut https://www.section.io/engineering-education/how-to-use-localstorage-with-javascript/
 
-    let newEventIndex = 0;  //dette er indexen til den nye eventen, er bare for å deklarere en variabel i handleSubmit scopet
-    let keepGoing = true;   //condition for at loopen skal fortsette
+        let newEventIndex = 0;  //dette er indexen til den nye eventen, er bare for å deklarere en variabel i handleSubmit scopet
+        let keepGoing = true;   //condition for at loopen skal fortsette
 
-    //for-loop som skjekker om man har laget events før, så man ikke overlapper "keys"/"indexer" og sletter tidligere lagde events.
-    while(keepGoing === true){                                                                                          //mens 'keepGoing = 0' så fortsetter den å loope.
-        if (localStorage["madeEvent" + newEventIndex]){                                                                 //ser om den finnes en 'madeEvent + newEventIndex' i localStorage allerede. (eks: "madeEvent0")
-            console.log("you've done this before?! wow! you already have " + (newEventIndex + 1) + " event(s) made! ")  //hvis fks 'madeEvent0' finnes -> skriver ut meldingen her
-        }
-        else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen
-            break;
-        }
-        newEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
-    }                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
-    let key = "madeEvent" + newEventIndex;                                                                              //lager var key (fks "madeEvent15") som man kan bruke som ID for å lagre eventen.
-    localStorage.setItem(key, JSON.stringify(eventObj));                                                                //lagrer eventen vår som string, under key (ID) som fks kan være 'madeEvent15'
+        //for-loop som skjekker om man har laget events før, så man ikke overlapper "keys"/"indexer" og sletter tidligere lagde events.
+        while(keepGoing === true){                                                                                          //mens 'keepGoing = 0' så fortsetter den å loope.
+            if (localStorage["madeEvent" + newEventIndex]){                                                                 //ser om den finnes en 'madeEvent + newEventIndex' i localStorage allerede. (eks: "madeEvent0")
+                console.log("you've done this before?! wow! you already have " + (newEventIndex + 1) + " event(s) made! ")  //hvis fks 'madeEvent0' finnes -> skriver ut meldingen her
+            }
+            else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen
+                break;
+            }
+            newEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
+        }                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
+        let key = "madeEvent" + newEventIndex;                                                                              //lager var key (fks "madeEvent15") som man kan bruke som ID for å lagre eventen.
+        localStorage.setItem(key, JSON.stringify(eventObj));                                                                //lagrer eventen vår som string, under key (ID) som fks kan være 'madeEvent15'
 
-    console.log("the new event you made will have the key: " + key)
-}
-const form = document.querySelector('form');
-form.addEventListener('submit', handleSubmit);
+        console.log("the new event you made will have the key: " + key)
+    }
+    const form = document.querySelector('form');
+    form.addEventListener('submit', handleSubmit);
 
 </script>
 </body>
