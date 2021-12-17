@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<div class="smartphone">
+<div class="smartphone bakgrunnsfarge">
     <div class="content" id="content">
         <div id="pageTitle"> ADD EVENT DETAILS</div>
 
@@ -76,28 +76,28 @@
 
 
 
-        <!-- Navbar -->
-        <nav class="nav">
-            <a href="hovedside.html" class="NavKnapp">
-                <span class="material-icons">home</span> <!--Bilde ikone på navbaren-->
-                <span class="IconName">Homepage</span> <!--Navnet på navbar knappene-->
+            <!-- Navbar -->
+            <nav class="nav">
+                <a href="hovedside.html" class="NavKnapp">
+                    <span class="material-icons">home</span> <!--Bilde ikone på navbaren-->
+                    <span class="IconName">Homepage</span> <!--Navnet på navbar knappene-->
 
-            </a>
-            <a href="addEvent.html" class="NavKnapp active">
-                <span class="material-icons">add_box</span> <!--Bilde ikone på navbaren-->
-                <span class="IconName">Add Event</span> <!--Navnet på navbar knappene-->
+                </a>
+                <a href="addEvent.html" class="NavKnapp active">
+                    <span class="material-icons">add_box</span> <!--Bilde ikone på navbaren-->
+                    <span class="IconName">Add Event</span> <!--Navnet på navbar knappene-->
 
-            </a>
-            <a href="#" class="NavKnapp">
-                <span class="material-icons">favorite</span> <!--Bilde ikone på navbaren-->
-                <span class="IconName">Favorites</span> <!--Navnet på navbar knappene-->
+                </a>
+                <a href="#" class="NavKnapp">
+                    <span class="material-icons">favorite</span> <!--Bilde ikone på navbaren-->
+                    <span class="IconName">Favorites</span> <!--Navnet på navbar knappene-->
 
-            </a>
-            <a href="profile.html" class="NavKnapp">
-                <span class="material-icons">account_box</span> <!--Bilde ikone på navbaren-->
-                <span class="IconName">Profile</span> <!--Navnet på navbar knappene-->
-            </a>
-        </nav>
+                </a>
+                <a href="profile.html" class="NavKnapp">
+                    <span class="material-icons">account_box</span> <!--Bilde ikone på navbaren-->
+                    <span class="IconName">Profile</span> <!--Navnet på navbar knappene-->
+                </a>
+            </nav>
     </div>
 </div> <!--Hentet fra w3schools, link:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_device_smartphone -->
 
@@ -106,37 +106,67 @@
 
 
 <script>
-    function handleSubmit(event) {
-        event.preventDefault();
-        const data = new FormData(event.target);                                                                            //henter form-en
-        const eventObj = Object.fromEntries(data.entries());                                                                //objectifiserer inputtene til bruker
-        eventObj.organizer = "John Doe (you)";
-        let meldtPaa = Math.floor(parseInt(eventObj.nop) * Math.random() * Math.random());                                  //gir eventen et random (sansynlig lavt) antall meldt på, som er en brøkdel av nop (max antallet).
-        eventObj.participants = meldtPaa;
-        console.log(eventObj.signedUp)
+function handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);                                                                            //henter form-en
+    const eventObj = Object.fromEntries(data.entries());                                                                //objectifiserer inputtene til bruker
+    eventObj.organizer = "John Doe (you)";
+    let meldtPaa = Math.floor(parseInt(eventObj.nop) * Math.random() * Math.random());                                  //gir eventen et random (sansynlig lavt) antall meldt på, som er en brøkdel av nop (max antallet).
+    eventObj.signedUp = meldtPaa;
+    console.log(eventObj.signedUp)
 
-        //bruker localStorage til å lagre (midlertidig), skjekk ut https://www.section.io/engineering-education/how-to-use-localstorage-with-javascript/
+    //bruker localStorage til å lagre (midlertidig), skjekk ut https://www.section.io/engineering-education/how-to-use-localstorage-with-javascript/
 
-        let newEventIndex = 0;  //dette er indexen til den nye eventen, er bare for å deklarere en variabel i handleSubmit scopet
-        let keepGoing = true;   //condition for at loopen skal fortsette
+    let newEventIndex = 0;  //dette er indexen til den nye eventen, er bare for å deklarere en variabel i handleSubmit scopet
+    let keepGoing = true;   //condition for at loopen skal fortsette
 
-        //for-loop som skjekker om man har laget events før, så man ikke overlapper "keys"/"indexer" og sletter tidligere lagde events.
-        while(keepGoing === true){                                                                                          //mens 'keepGoing = 0' så fortsetter den å loope.
-            if (localStorage["madeEvent" + newEventIndex]){                                                                 //ser om den finnes en 'madeEvent + newEventIndex' i localStorage allerede. (eks: "madeEvent0")
-                console.log("you've done this before?! wow! you already have " + (newEventIndex + 1) + " event(s) made! ")  //hvis fks 'madeEvent0' finnes -> skriver ut meldingen her
-            }
-            else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen
-                break;
-            }
-            newEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
-        }                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
-        let key = "madeEvent" + newEventIndex;                                                                              //lager var key (fks "madeEvent15") som man kan bruke som ID for å lagre eventen.
-        localStorage.setItem(key, JSON.stringify(eventObj));                                                                //lagrer eventen vår som string, under key (ID) som fks kan være 'madeEvent15'
+    //for-loop som skjekker om man har laget events før, så man ikke overlapper "keys"/"indexer" og sletter tidligere lagde events.
+    while(keepGoing === true){                                                                                          //mens 'keepGoing = 0' så fortsetter den å loope.
+        if (localStorage["madeEvent" + newEventIndex]){                                                                 //ser om den finnes en 'madeEvent + newEventIndex' i localStorage allerede. (eks: "madeEvent0")
+            console.log("you've done this before?! wow! you already have " + (newEventIndex + 1) + " event(s) made! ")  //hvis fks 'madeEvent0' finnes -> skriver ut meldingen her
+        }
+        else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen
+            break;
+        }
+        newEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
+    }                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
+    let key = "madeEvent" + newEventIndex;                                                                              //lager var key (fks "madeEvent15") som man kan bruke som ID for å lagre eventen.
+    localStorage.setItem(key, JSON.stringify(eventObj));                                                                //lagrer eventen vår som string, under key (ID) som fks kan være 'madeEvent15'
 
-        console.log("the new event you made will have the key: " + key)
-    }
-    const form = document.querySelector('form');
-    form.addEventListener('submit', handleSubmit);
+    console.log("the new event you made will have the key: " + key)
+
+    makeModal()
+}
+function makeModal() {
+
+    //lager modal for pop-up av event sin info side / pålogging osv
+    let lagetEventPopup = document.createElement("div");                                     //lager tom div
+    lagetEventPopup.id = "modal";
+
+    lagetEventPopup.innerHTML = `
+
+        <div class="modalHeader">
+            <h2> Event created! </h2>
+            <p> you can find it at the homepage </p>
+        </div>
+
+        <div class="modalFooter">
+            <button class="modalBtn" onclick="location.href = 'hovedside.html'" <strong> Homepage </strong> </button>
+            <button class="modalBtn" onclick="location.reload()"> <strong> Make another </strong> </button>
+        </div>
+    `;
+
+    let parent = document.getElementById("content");                                        // henter div/parent jeg skal plassere modalen (og bakgrunnen)
+    let bg = document.createElement("div");                                                 // lager element (div) for tåke/dim-effekten i bakgrunn av modalen
+    bg.className = "modal-js-overlay";                                                      // annen måte å gi classes
+    parent.appendChild(bg);                                                                 // appender bakgrunnen (tåka) inn i content-div
+    document.getElementById("content").appendChild(lagetEventPopup);                        //appender modalen inn i "content" div (skjerm-delen av telefonen)
+}
+
+
+
+const form = document.querySelector('form');
+form.addEventListener('submit', handleSubmit);
 
 </script>
 </body>

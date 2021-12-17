@@ -3,6 +3,7 @@
     --MainBG: rgb(62, 13, 42);   /* mørk farge som parrer bra med Main fargen */
 }
 
+/* til alt innhold på siden */
 body{
     font-feature-settings: "liga" 0;
     font-family: sans-serif;
@@ -62,7 +63,7 @@ body{
     background-color: var(--MainBG);
 }
 
-
+/* ting under er til navbar */
 .nav{
     background-color: var(--Main);
     position: absolute;
@@ -99,7 +100,7 @@ body{
     font-size: 16px;
     color: black;
 }
-
+/* ting over er til navbar */
 
 
 
@@ -113,6 +114,7 @@ input[type=text], input[type=date], input[type=number], select {
     box-sizing: border-box;
 }
 
+/* info element i modal */
 .eventDescription {
     height: 100px;
     width: 96%;
@@ -123,6 +125,7 @@ input[type=text], input[type=date], input[type=number], select {
     overflow-y: scroll;
 }
 
+/* navbar */
 input[type=submit] {
     width: 100%;
     background-color: var(--Main);
@@ -140,7 +143,7 @@ input[type=submit] {
     text-transform: uppercase;
 }
 
-
+/* modal element */
 .label{
     height: 30px;
     vertical-align: bottom;
@@ -154,4 +157,77 @@ label{
     font-size: 20px;
     text-align: center;
     font-weight: bold;
+}
+
+/* modal, eller pop.up vindu hvis du vil*/
+#modal {
+    position: absolute;
+    top: 36%;
+    bottom: 36%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    border-radius: 20px;
+    background-color: var(--MainBG);
+    z-index: 60000;
+    display: flex;
+    flex-flow: column;
+    max-height: 28%;
+    box-sizing: border-box;
+    box-shadow: 0 0 25px 5px black;
+}
+
+/* tåka bak modal*/
+.modal-js-overlay {
+    background: #222;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20000;
+    left: 0;
+}
+/* lille underteksten i modal, som er en <p> */
+#modal p {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    color: whitesmoke;
+}
+/* knappene i modalen */
+.modalBtn{
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    border: 2px solid black;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    width: 140px;
+    height: 50px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 5px 3px 0 darkred;
+    background-color: var(--Main);
+    cursor: pointer;
+}
+/* når du holder over en av knappene */
+.modalBtn:hover{
+    background-color: maroon;
+}
+/* når du trykker på en knapp */
+.modalBtn:active{
+    box-shadow: 0 1px 3px 0 darkred;
+    transform: translateY(4px);
+}
+/* teksten i modalen */
+.modalHeader{
+    font-size: 18px;
+    padding: 5px 10px;
+    text-align: center;
+}
+/* knappene */
+.modalFooter{
+    text-align: center;
 }
