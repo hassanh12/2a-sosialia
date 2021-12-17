@@ -101,7 +101,7 @@
             category: "sport",
             date: "2021-11-08",
             eventInfo: "Litt casual volleyball på campus.\r\nTenker vi starter rundt klokka 14:00 og holder på så lenge vi orker.",
-            participants: 21,
+            participants: 20,
             nop: 21,
             city: "Kristiansand",
             address: "Tulleadresse 202",
@@ -128,7 +128,6 @@
         if (localStorage[madeEventKey]){                                                                                //ser om den finnes en 'madeEvent + newEventIndex' i localStorage. (eks: "madeEvent0")
             let madeEvent = JSON.parse(localStorage.getItem(madeEventKey));
             events.push(madeEvent)
-            console.log(madeEventKey)
         }
         else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen (keepGoing = false)
             keepGoing = false; // or 'break'
@@ -136,7 +135,6 @@
         madeEventIndex++;                                                                                                //plusser newEventIndex med 1, dette skjer bare hvis den når bunnen av loopen (altså det finnes en 'madeEvent' + newEventIndex)
     }                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
 
-    console.log(events) //logger objektene/personene fra brukerData i konsollen
     events.forEach((object, i) => makeEventCards(object, i))    //for hver event i listen "events" -> lag div/event på homepage
     events.forEach((object, i) => makeModal(object, i))         //for hver event i listen "events" -> lag modaler på homepage
 
@@ -310,17 +308,23 @@
         parent.removeChild(overlay);                                // fjerner bakgrunn fra content-div
     }
 
+
+
     //funskjon for å "signe up", som lagrer index til eventen i en liste "signedup". Indexene i lista kan bli brukt til å se hvilke som er signed up. Skulle egentlig brukt (set() istedetfor list, men er veldig vanskelig å stringify()/lagre i localStorage)
-    function signUp(key) {
-        localStorage.setItem("signedup", JSON.stringify([...JSON.parse(localStorage.getItem("signedup")), key]));    //hahaha, lang kode-linje, men: henter signedup (list/array som string) fra localstorage -> gjør om fra string til object (array/list) -> legger til key i arrayen, og returnerer "oppdatert liste" -> gjør om oppdatert liste til string -> pusher opp i localStorage
+    function signUp(i) {
+        localStorage.setItem("signedup", JSON.stringify([...JSON.parse(localStorage.getItem("signedup")), i]));    //hahaha, lang kode-linje, men: henter signedup (list/array som string) fra localstorage -> gjør om fra string til object (array/list) -> legger til key i arrayen, og returnerer "oppdatert liste" -> gjør om oppdatert liste til string -> pusher opp i localStorage
+
         location.reload()
     }
+
+
     //funskjon for å droppe ut av event. som er å ta bort event-indexen fra signedup lista i localStorage
-    function dropEvent(key){
+    function dropEvent(i){
         const signedups = JSON.parse(localStorage.getItem("signedup"));                 //henter liste fra localStorage
         localStorage.setItem("signedup", JSON.stringify(                                //skal pushe opp det under som nye "signedup" (altså oppdatert)
-            signedups.filter(function(value, index, arr){return value !== key})         //sletter key fra lista/arrayen
+            signedups.filter(function(value, index, arr){return value !== i})         //sletter key fra lista/arrayen
         ))
+
         location.reload()
     }
 

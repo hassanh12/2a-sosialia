@@ -1,6 +1,7 @@
 :root{  /* Dette er deklarering av globale variabler i css. Bare for lett endring av farge. https://www.w3schools.com/css/css3_variables.asp */
-    --Main: rgb(200, 16, 46);    /* samme rød-farge som UIA logo */
-    --MainBG: rgb(62, 13, 42);   /* mørk farge som parrer bra med Main fargen */
+    --Main: rgb(200, 16, 46);       /* samme rød-farge som UIA logo */
+    --MainBG: rgb(62, 13, 42);      /* mørk farge som parrer bra med Main fargen */
+    --mainDimmed: rgb(180, 15, 43)  /* dimmet versjon av main, for hover etc*/
 }
 
 body{
@@ -94,7 +95,7 @@ body{
 }
 /* hover over nav-bar knapp */
 .NavKnapp:hover, input[type=submit]:hover{
-    background-color: maroon;
+    background-color: var(--mainDimmed);
 }
 /* klasse for å vise (på nav-baren) hvilken side som er åpen */
 .active {
@@ -106,6 +107,7 @@ body{
     font-size: 16px;
     color: black;
 }
+/* sier seg selv */
 #pageTitle {
     border-bottom: 1px solid white;
     padding: 10px;
@@ -113,10 +115,12 @@ body{
     text-align: center;
     font-weight: bold;
 }
+/* div filterene ligger i, er for "float right" effekten */
 #search{
     margin: 10px 5% 10px auto;
     display: table;
 }
+/* activity filter på toppen */
 #filterMeny{
     color: white;
     font-family: arial;
@@ -127,6 +131,7 @@ body{
     background-color: var(--Main);
     box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
 }
+/* sort filter på toppen */
 #sorterMeny{
     color: white;
     font-family: arial;
@@ -138,7 +143,7 @@ body{
     background-color: var(--Main);
     box-shadow: 0 5px 5px 0 rgba(200, 16, 46,0.5);
 }
-
+/* the eventcards */
 .eventDiv {
     width: 90%;
     margin-left: auto;
@@ -151,15 +156,17 @@ body{
     background-color: var(--Main);
     cursor: pointer;
 }
+/* event card element */
 .eventsTable{
     height: 85px;
     width: 100%;
 }
+/* event card element */
 .eventsTableRight{
     height: 60px;
     width: 100%;
 }
-
+/* barriere mellom content på event cards */
 .eventbarriere{
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -189,13 +196,13 @@ body{
     box-sizing: border-box;
     box-shadow: 0 0 25px 5px black;
 }
-
+/* klasse for å vise modal etter klikk */
 .modal.on {
     display: flex;
     flex-flow: column;
     height: 100%;
 }
-
+/* modal tåke/haze bakgrunns effekt */
 .modal-js-overlay {
     background: #444;
     opacity: .8;
@@ -206,7 +213,7 @@ body{
     z-index: 20000;
     left: 0;
 }
-
+/* lille close knappen på modal */
 .modal-js-close {
     position: absolute;
     bottom: 0px;
@@ -250,7 +257,7 @@ body{
     flex: 0 1 100px;
     text-align: center;
 }
-
+/* knapp i modal */
 .signUpBtn{
     margin-left: 0;
     margin-right: 0;
@@ -266,7 +273,16 @@ body{
     background-color: var(--Main);
     cursor: pointer;
 }
-
+/* når du holder over en knapp */
+.signUpBtn:hover{
+    background-color: var(--mainDimmed);
+}
+/* når du trykker på en knapp */
+.signUpBtn:active{
+    box-shadow: 0 1px 3px 0 darkred;
+    transform: translateY(4px);
+}
+/* modal element's/div's */
 .modalDate .modalOrganizer .modalInfo .modalAddress {
     padding: 10px;
 }
@@ -292,10 +308,12 @@ body{
 .modalAddressDiv{
     flex: 1 0 30px;
 }
+
 .modalAddress {
     width: 250px;
     float: left;
 }
+/* google maps iconet i event modalene */
 .mapIcon {
     height: 30px;
     width: 30px;

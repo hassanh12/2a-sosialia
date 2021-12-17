@@ -112,8 +112,7 @@ function handleSubmit(event) {
     const eventObj = Object.fromEntries(data.entries());                                                                //objectifiserer inputtene til bruker
     eventObj.organizer = "John Doe (you)";
     let meldtPaa = Math.floor(parseInt(eventObj.nop) * Math.random() * Math.random());                                  //gir eventen et random (sansynlig lavt) antall meldt på, som er en brøkdel av nop (max antallet).
-    eventObj.signedUp = meldtPaa;
-    console.log(eventObj.signedUp)
+    eventObj.participants = meldtPaa;
 
     //bruker localStorage til å lagre (midlertidig), skjekk ut https://www.section.io/engineering-education/how-to-use-localstorage-with-javascript/
 
@@ -132,8 +131,6 @@ function handleSubmit(event) {
     }                                                                                                                   //etter ^ looper den omigjen helt til vi har en 'madeEventX' som ikke har blitt brukt
     let key = "madeEvent" + newEventIndex;                                                                              //lager var key (fks "madeEvent15") som man kan bruke som ID for å lagre eventen.
     localStorage.setItem(key, JSON.stringify(eventObj));                                                                //lagrer eventen vår som string, under key (ID) som fks kan være 'madeEvent15'
-
-    console.log("the new event you made will have the key: " + key)
 
     makeModal()
 }

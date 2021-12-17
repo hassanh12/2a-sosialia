@@ -96,6 +96,7 @@ body{
 .active{
     color: black;
 }
+/* navbar label */
 .IconName{
     font-size: 16px;
     color: black;
@@ -151,6 +152,7 @@ input[type=submit] {
 label{
     color: white;
 }
+/* sier seg selv */
 #pageTitle {
     border-bottom: 1px solid white;
     padding: 10px;

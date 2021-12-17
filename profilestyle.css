@@ -1,6 +1,7 @@
 :root{  /* Dette er deklarering av globale variabler i css. Bare for lett endring av farge. https://www.w3schools.com/css/css3_variables.asp */
     --Main: rgb(200, 16, 46);    /* samme rød-farge som UIA logo */
     --MainBG: rgb(62, 13, 42);   /* mørk farge som parrer bra med Main fargen */
+    --mainDimmed: rgb(180, 15, 43)  /* dimmet versjon av main, for hover etc*/
 }
 
 body{
@@ -70,6 +71,7 @@ body{
     height: 55px;
     bottom: 0;
     width: 100%;
+    font-weight: bold;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
     overflow-x: auto; /*utvide kompatibiliteten og støtter for mindre skjermer,  brukeren kan bla ikonene hvis det er nødvendig*/
 }
@@ -90,7 +92,7 @@ body{
     transition: background-color 0.1s ease-in-out; /*Gjør hoveren smooth*/
 }
 .NavKnapp:hover, input[type=submit]:hover{
-    background-color: maroon;
+    background-color: var(--mainDimmed);
 }
 .active {
     color: black;
@@ -131,7 +133,7 @@ body{
     color: #303030;
     font-size: 18px;
 }
-
+/* tekst for <span> som står under "my events" hvis man ikke har meldt seg på noen events */
 #preSignedUp{
     display: table;
     margin: 0 auto;
@@ -140,11 +142,9 @@ body{
     padding: 5px;
 }
 
-button:hover, a:hover {
-    opacity: 0.7;
-}
 
 
+/* selve event card div*/
 .eventDiv {
     width: 90%;
     margin-left: auto;
@@ -165,7 +165,7 @@ button:hover, a:hover {
     height: 60px;
     width: 100%;
 }
-
+/* skillevegg mellom innhold i event cards */
 .eventbarriere{
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -193,13 +193,13 @@ button:hover, a:hover {
     box-sizing: border-box;
     box-shadow: 0 0 25px 5px black;
 }
-
+/* to show modal when "active" (tapped 'paired' eventcard) */
 .modal.on {
     display: flex;
     flex-flow: column;
     height: 100%;
 }
-
+/* background haze effect when modal is open */
 .modal-js-overlay {
     background: #444;
     opacity: .8;
@@ -210,7 +210,7 @@ button:hover, a:hover {
     z-index: 20000;
     left: 0;
 }
-
+/* small close button on the modal */
 .modal-js-close {
     position: absolute;
     bottom: 0px;
@@ -254,7 +254,7 @@ button:hover, a:hover {
     flex: 0 1 100px;
     text-align: center;
 }
-
+/* button inside modal */
 .signUpBtn{
     margin-left: 0;
     margin-right: 0;
@@ -270,7 +270,17 @@ button:hover, a:hover {
     background-color: var(--Main);
     cursor: pointer;
 }
+/* når du holder over en knapp */
+.signUpBtn:hover{
+    background-color: var(--mainDimmed);
+}
+/* når du trykker på en knapp */
+.signUpBtn:active{
+    box-shadow: 0 1px 3px 0 darkred;
+    transform: translateY(4px);
+}
 
+/* modal elements / divs */
 .modalDate .modalOrganizer .modalInfo .modalAddress {
     padding: 10px;
 }
@@ -300,6 +310,7 @@ button:hover, a:hover {
     width: 250px;
     float: left;
 }
+/* google maps icon i modal */
 .mapIcon {
     height: 30px;
     width: 30px;

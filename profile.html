@@ -30,6 +30,10 @@
 
         <div id="main"> <span id="preSignedUp">meld deg på noen events!</span> </div> <!-- div som blir fyllt av events -->
 
+        <div style="height: 55px; width: auto">
+            <!-- placeholder så man kan se nederste event /og den ikke blir dekket til av nav-bar -->
+        </div>
+
         <nav class="nav">
             <a href="hovedside.html" class="NavKnapp">
                 <span class="material-icons">home</span> <!--Bilde ikone på navbaren-->
@@ -57,7 +61,7 @@
 
 <script>
 
-    let events = [
+    let events = [//premade events
         {
             eventTitle: "Fotball turnering",
             category: "sport",
@@ -112,7 +116,6 @@
         if (localStorage[madeEventKey]){                                                                                //ser om den finnes en 'madeEvent + newEventIndex' i localStorage. (eks: "madeEvent0")
             let madeEvent = JSON.parse(localStorage.getItem(madeEventKey));
             events.push(madeEvent)
-            console.log(madeEventKey)
         }
         else {                                                                                                          //hvis ikke fks 'madeEvent0' over finner, så stopper den funskjonen (keepGoing = false)
             keepGoing = false; // or 'break'
@@ -276,15 +279,15 @@
     }
 
     //funskjon for å "signe up", som lagrer index til eventen i en liste "signedup". Indexene i lista kan bli brukt til å se hvilke som er signed up. Skulle egentlig brukt (set() istedetfor list, men er veldig vanskelig å stringify()/lagre i localStorage)
-    function signUp(key) {
-        localStorage.setItem("signedup", JSON.stringify([...JSON.parse(localStorage.getItem("signedup")), key]));    //hahaha, lang kode-linje, men: henter signedup (list/array som string) fra localstorage -> gjør om fra string til object (array/list) -> legger til key i arrayen, og returnerer "oppdatert liste" -> gjør om oppdatert liste til string -> pusher opp i localStorage
+    function signUp(i) {
+        localStorage.setItem("signedup", JSON.stringify([...JSON.parse(localStorage.getItem("signedup")), i]));    //hahaha, lang kode-linje, men: henter signedup (list/array som string) fra localstorage -> gjør om fra string til object (array/list) -> legger til key i arrayen, og returnerer "oppdatert liste" -> gjør om oppdatert liste til string -> pusher opp i localStorage
         location.reload()
     }
     //funskjon for å droppe ut av event. som er å ta bort event-indexen fra signedup lista i localStorage
-    function dropEvent(key){
+    function dropEvent(i){
         const signedups = JSON.parse(localStorage.getItem("signedup"));                 //henter liste fra localStorage
         localStorage.setItem("signedup", JSON.stringify(                                //skal pushe opp det under som nye "signedup" (altså oppdatert)
-            signedups.filter(function(value, index, arr){return value !== key})         //sletter key fra lista/arrayen
+            signedups.filter(function(value, index, arr){return value !== i})         //sletter key fra lista/arrayen
         ))
         location.reload()
     }
